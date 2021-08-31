@@ -1,15 +1,17 @@
-name: Swift build & test CI
+name: Build and test on PR
 
 on:
   pull_request:
     branches: [ main ]
+
+  workflow_dispatch:
 
 jobs:
   build:
     name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [macos-latest]
         swift: ["5.3"]
     runs-on: ${{ matrix.os }}
     steps:
@@ -17,9 +19,17 @@ jobs:
         with:
           swift-version: ${{ matrix.swift }}
 
-      - uses: actions/checkout@v2
-      - name: Build
-        run: swift build -v
+      - name: Checkout repository
+        uses: actions/checkout@v2
       
-      - name: Run tests
-        run: swift test -v
+      - name: Install tests output beautifier
+        run: brew install xcbeautify
+
+      - name: Build and test
+        run: |
+          xcodebuild test \
+          -project UP\ Sample.xcodeproj \
+          -scheme UP\ Sample \
+          -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.5' 
+          | xcbeautify
