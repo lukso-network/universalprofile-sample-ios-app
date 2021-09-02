@@ -50,4 +50,12 @@ jobs:
           xcodebuild -project UP\ Authenticator.xcodeproj \
           -sdk iphoneos \
           -scheme UP\ Sample \
+          -configuration Release \
           -archivePath UP_Sample.xcarchive archive
+          
+      - name: Upload
+        run: |
+          xcodebuild -exportArchive \
+          -archivePath UP_Sample.xcarchive \
+          -exportOptionsPlist ExportOptions.plist \
+          -exportPath exported
