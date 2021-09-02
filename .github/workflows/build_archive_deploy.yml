@@ -47,7 +47,7 @@ jobs:
   
       - name: Archive
         run: |
-          xcodebuild -project UP\ Authenticator.xcodeproj \
+          xcodebuild -project UP\ Sample.xcodeproj \
           -sdk iphoneos \
           -scheme UP\ Sample \
           -configuration Release \
