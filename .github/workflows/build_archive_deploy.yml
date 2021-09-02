@@ -47,7 +47,8 @@ jobs:
   
       - name: Archive
         run: |
-          xcodebuild -project UP\ Sample.xcodeproj \
+          xcodebuild -allowProvisioningUpdates \
+          -project UP\ Sample.xcodeproj \
           -sdk iphoneos \
           -scheme UP\ Sample \
           -configuration Release \
