@@ -31,5 +31,5 @@ jobs:
           -project UP\ Sample.xcodeproj \
           -scheme UP\ Sample \
           -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 12,OS=14.5' 
+          -destination 'platform=iOS Simulator,name=iPhone 12 mini,OS=14.4' 
           | xcbeautify
