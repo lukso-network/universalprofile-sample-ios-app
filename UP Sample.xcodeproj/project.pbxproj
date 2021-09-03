@@ -11,31 +11,8 @@
 		D611D2D926DA334D00C31E3D /* SampleResourceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D611D2D726DA334D00C31E3D /* SampleResourceService.swift */; };
 		D611D2DA26DA334D00C31E3D /* SampleResourceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D611D2D726DA334D00C31E3D /* SampleResourceService.swift */; };
 		D6782A6026CF97F2007737C5 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6782A5F26CF97F2007737C5 /* AppError.swift */; };
-		D6789CD726DE67BE00650863 /* universalprofile_ios_sdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6789CD526DE67BE00650863 /* universalprofile_ios_sdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6789CD826DE67DF00650863 /* universalprofile_ios_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6789CD526DE67BE00650863 /* universalprofile_ios_sdk.framework */; };
-		D6789CD926DE680600650863 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004E26D2D4FC008C9403 /* Alamofire.framework */; };
-		D6789CDA26DE680600650863 /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005026D2D4FC008C9403 /* BigInt.framework */; };
-		D6789CDB26DE680600650863 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004D26D2D4FC008C9403 /* CryptoSwift.framework */; };
-		D6789CDC26DE680600650863 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005126D2D4FC008C9403 /* PromiseKit.framework */; };
-		D6789CDD26DE680600650863 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017726D6532E008C9403 /* RxBlocking.framework */; };
-		D6789CDE26DE680600650863 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017526D6532E008C9403 /* RxCocoa.framework */; };
-		D6789CDF26DE680600650863 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017426D6532E008C9403 /* RxRelay.framework */; };
-		D6789CE026DE680600650863 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017826D6532E008C9403 /* RxSwift.framework */; };
-		D6789CE126DE680600650863 /* secp256k1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004F26D2D4FC008C9403 /* secp256k1.framework */; };
-		D6789CE226DE680600650863 /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005326D2D4FC008C9403 /* SipHash.framework */; };
-		D6789CE326DE680600650863 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005226D2D4FC008C9403 /* Starscream.framework */; };
-		D6789CE426DE680600650863 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B00B826D4EAA9008C9403 /* Swinject.framework */; };
-		D6789CE526DE680600650863 /* universalprofile_ios_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6789CD526DE67BE00650863 /* universalprofile_ios_sdk.framework */; };
-		D6789CE626DE680600650863 /* web3swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004C26D2D4FC008C9403 /* web3swift.framework */; };
 		D6789CE726DE683A00650863 /* universalprofile_ios_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6789CD526DE67BE00650863 /* universalprofile_ios_sdk.framework */; };
-		D68B005526D2D4FC008C9403 /* web3swift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004C26D2D4FC008C9403 /* web3swift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D68B005726D2D4FC008C9403 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004D26D2D4FC008C9403 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D68B005926D2D4FC008C9403 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004E26D2D4FC008C9403 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D68B005B26D2D4FC008C9403 /* secp256k1.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004F26D2D4FC008C9403 /* secp256k1.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D68B005D26D2D4FC008C9403 /* BigInt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005026D2D4FC008C9403 /* BigInt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D68B005F26D2D4FC008C9403 /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005126D2D4FC008C9403 /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D68B006126D2D4FC008C9403 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005226D2D4FC008C9403 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D68B006326D2D4FC008C9403 /* SipHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005326D2D4FC008C9403 /* SipHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68B006626D2DC3D008C9403 /* DependencyInjectorContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B006526D2DC3D008C9403 /* DependencyInjectorContainer.swift */; };
 		D68B006A26D2DCEC008C9403 /* Web3KeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B006926D2DCEC008C9403 /* Web3KeyStore.swift */; };
 		D68B006C26D2DD26008C9403 /* KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B006B26D2DD26008C9403 /* KeyValueStore.swift */; };
@@ -76,10 +53,8 @@
 		D68B00B126D4CF30008C9403 /* PasswordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B00B026D4CF2F008C9403 /* PasswordStore.swift */; };
 		D68B00B226D4CF34008C9403 /* PasswordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B00B026D4CF2F008C9403 /* PasswordStore.swift */; };
 		D68B00B326D4CF34008C9403 /* PasswordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B00B026D4CF2F008C9403 /* PasswordStore.swift */; };
-		D68B00B526D4EA70008C9403 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = D68B00B426D4EA70008C9403 /* Cartfile */; };
 		D68B00B926D4EAA9008C9403 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B00B826D4EAA9008C9403 /* Swinject.framework */; };
 		D68B00BA26D4EAB5008C9403 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B00B826D4EAA9008C9403 /* Swinject.framework */; };
-		D68B00BC26D4EACD008C9403 /* Swinject.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B00B826D4EAA9008C9403 /* Swinject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68B00CB26D4F505008C9403 /* SampleResourceServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B00CA26D4F505008C9403 /* SampleResourceServiceImpl.swift */; };
 		D68B00CC26D4F505008C9403 /* SampleResourceServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B00CA26D4F505008C9403 /* SampleResourceServiceImpl.swift */; };
 		D68B00CD26D4F505008C9403 /* SampleResourceServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B00CA26D4F505008C9403 /* SampleResourceServiceImpl.swift */; };
@@ -107,10 +82,6 @@
 		D68B017026D63C35008C9403 /* BaseFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B016F26D63C35008C9403 /* BaseFlowViewModel.swift */; };
 		D68B017126D63C35008C9403 /* BaseFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B016F26D63C35008C9403 /* BaseFlowViewModel.swift */; };
 		D68B017226D63C35008C9403 /* BaseFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68B016F26D63C35008C9403 /* BaseFlowViewModel.swift */; };
-		D68B017A26D6532E008C9403 /* RxRelay.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017426D6532E008C9403 /* RxRelay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D68B017C26D6532F008C9403 /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017526D6532E008C9403 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D68B018026D6532F008C9403 /* RxBlocking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017726D6532E008C9403 /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D68B018226D6532F008C9403 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017826D6532E008C9403 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D68B018326D653A5008C9403 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017726D6532E008C9403 /* RxBlocking.framework */; };
 		D68B018426D653A5008C9403 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017526D6532E008C9403 /* RxCocoa.framework */; };
 		D68B018526D653A5008C9403 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017426D6532E008C9403 /* RxRelay.framework */; };
@@ -123,13 +94,40 @@
 		D68B018C26D653BB008C9403 /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017626D6532E008C9403 /* RxTest.framework */; };
 		D68B019026D6557E008C9403 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B018D26D65572008C9403 /* XCTest.framework */; };
 		D68B019126D65584008C9403 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B018D26D65572008C9403 /* XCTest.framework */; };
+		D6BC42BA26E11CE300A62847 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004E26D2D4FC008C9403 /* Alamofire.framework */; };
+		D6BC42BB26E11CE300A62847 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004E26D2D4FC008C9403 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42BD26E11CE500A62847 /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005026D2D4FC008C9403 /* BigInt.framework */; };
+		D6BC42BE26E11CE500A62847 /* BigInt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005026D2D4FC008C9403 /* BigInt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42BF26E11CE600A62847 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004D26D2D4FC008C9403 /* CryptoSwift.framework */; };
+		D6BC42C026E11CE600A62847 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004D26D2D4FC008C9403 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42C126E11CE700A62847 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005126D2D4FC008C9403 /* PromiseKit.framework */; };
+		D6BC42C226E11CE700A62847 /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005126D2D4FC008C9403 /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42C326E11CE800A62847 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017726D6532E008C9403 /* RxBlocking.framework */; };
+		D6BC42C426E11CE800A62847 /* RxBlocking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017726D6532E008C9403 /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42C526E11CE900A62847 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017526D6532E008C9403 /* RxCocoa.framework */; };
+		D6BC42C626E11CE900A62847 /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017526D6532E008C9403 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42C726E11CEB00A62847 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017426D6532E008C9403 /* RxRelay.framework */; };
+		D6BC42C826E11CEB00A62847 /* RxRelay.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017426D6532E008C9403 /* RxRelay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42C926E11CEC00A62847 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017826D6532E008C9403 /* RxSwift.framework */; };
+		D6BC42CA26E11CEC00A62847 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B017826D6532E008C9403 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42CB26E11CED00A62847 /* secp256k1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004F26D2D4FC008C9403 /* secp256k1.framework */; };
+		D6BC42CC26E11CED00A62847 /* secp256k1.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004F26D2D4FC008C9403 /* secp256k1.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42CD26E11CEE00A62847 /* SipHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005326D2D4FC008C9403 /* SipHash.framework */; };
+		D6BC42CE26E11CEE00A62847 /* SipHash.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005326D2D4FC008C9403 /* SipHash.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42CF26E11CEF00A62847 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005226D2D4FC008C9403 /* Starscream.framework */; };
+		D6BC42D026E11CEF00A62847 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005226D2D4FC008C9403 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42D126E11CF100A62847 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B00B826D4EAA9008C9403 /* Swinject.framework */; };
+		D6BC42D226E11CF100A62847 /* Swinject.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B00B826D4EAA9008C9403 /* Swinject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42D326E11CF200A62847 /* universalprofile_ios_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6789CD526DE67BE00650863 /* universalprofile_ios_sdk.framework */; };
+		D6BC42D426E11CF200A62847 /* universalprofile_ios_sdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6789CD526DE67BE00650863 /* universalprofile_ios_sdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6BC42D526E11CF300A62847 /* web3swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004C26D2D4FC008C9403 /* web3swift.framework */; };
+		D6BC42D626E11CF300A62847 /* web3swift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004C26D2D4FC008C9403 /* web3swift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6DCA54226CE50140035CC12 /* UP_SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DCA54126CE50140035CC12 /* UP_SampleApp.swift */; };
 		D6DCA54426CE50140035CC12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DCA54326CE50140035CC12 /* ContentView.swift */; };
 		D6DCA54626CE50150035CC12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6DCA54526CE50150035CC12 /* Assets.xcassets */; };
 		D6DCA54926CE50150035CC12 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6DCA54826CE50150035CC12 /* Preview Assets.xcassets */; };
 		D6DCA55426CE50150035CC12 /* UP_SampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DCA55326CE50150035CC12 /* UP_SampleTests.swift */; };
 		D6DCA55F26CE50150035CC12 /* UP_SampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DCA55E26CE50150035CC12 /* UP_SampleUITests.swift */; };
-		D6DCA57226CE507F0035CC12 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D6DCA56C26CE507F0035CC12 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,26 +148,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D68B006426D2D4FC008C9403 /* Embed Frameworks */ = {
+		D6BC42BC26E11CE400A62847 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D68B005526D2D4FC008C9403 /* web3swift.framework in Embed Frameworks */,
-				D68B006126D2D4FC008C9403 /* Starscream.framework in Embed Frameworks */,
-				D68B018226D6532F008C9403 /* RxSwift.framework in Embed Frameworks */,
-				D68B005926D2D4FC008C9403 /* Alamofire.framework in Embed Frameworks */,
-				D68B005726D2D4FC008C9403 /* CryptoSwift.framework in Embed Frameworks */,
-				D68B017A26D6532E008C9403 /* RxRelay.framework in Embed Frameworks */,
-				D68B005F26D2D4FC008C9403 /* PromiseKit.framework in Embed Frameworks */,
-				D6789CD726DE67BE00650863 /* universalprofile_ios_sdk.framework in Embed Frameworks */,
-				D68B006326D2D4FC008C9403 /* SipHash.framework in Embed Frameworks */,
-				D68B00BC26D4EACD008C9403 /* Swinject.framework in Embed Frameworks */,
-				D68B005D26D2D4FC008C9403 /* BigInt.framework in Embed Frameworks */,
-				D68B018026D6532F008C9403 /* RxBlocking.framework in Embed Frameworks */,
-				D68B017C26D6532F008C9403 /* RxCocoa.framework in Embed Frameworks */,
-				D68B005B26D2D4FC008C9403 /* secp256k1.framework in Embed Frameworks */,
+				D6BC42D426E11CF200A62847 /* universalprofile_ios_sdk.framework in Embed Frameworks */,
+				D6BC42D626E11CF300A62847 /* web3swift.framework in Embed Frameworks */,
+				D6BC42C626E11CE900A62847 /* RxCocoa.framework in Embed Frameworks */,
+				D6BC42C026E11CE600A62847 /* CryptoSwift.framework in Embed Frameworks */,
+				D6BC42C426E11CE800A62847 /* RxBlocking.framework in Embed Frameworks */,
+				D6BC42BB26E11CE300A62847 /* Alamofire.framework in Embed Frameworks */,
+				D6BC42D026E11CEF00A62847 /* Starscream.framework in Embed Frameworks */,
+				D6BC42CA26E11CEC00A62847 /* RxSwift.framework in Embed Frameworks */,
+				D6BC42C826E11CEB00A62847 /* RxRelay.framework in Embed Frameworks */,
+				D6BC42BE26E11CE500A62847 /* BigInt.framework in Embed Frameworks */,
+				D6BC42CE26E11CEE00A62847 /* SipHash.framework in Embed Frameworks */,
+				D6BC42D226E11CF100A62847 /* Swinject.framework in Embed Frameworks */,
+				D6BC42CC26E11CED00A62847 /* secp256k1.framework in Embed Frameworks */,
+				D6BC42C226E11CE700A62847 /* PromiseKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,20 +230,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6789CD926DE680600650863 /* Alamofire.framework in Frameworks */,
-				D6789CDA26DE680600650863 /* BigInt.framework in Frameworks */,
-				D6789CDB26DE680600650863 /* CryptoSwift.framework in Frameworks */,
-				D6789CDC26DE680600650863 /* PromiseKit.framework in Frameworks */,
-				D6789CDD26DE680600650863 /* RxBlocking.framework in Frameworks */,
-				D6789CDE26DE680600650863 /* RxCocoa.framework in Frameworks */,
-				D6789CDF26DE680600650863 /* RxRelay.framework in Frameworks */,
-				D6789CE026DE680600650863 /* RxSwift.framework in Frameworks */,
-				D6789CE126DE680600650863 /* secp256k1.framework in Frameworks */,
-				D6789CE226DE680600650863 /* SipHash.framework in Frameworks */,
-				D6789CE326DE680600650863 /* Starscream.framework in Frameworks */,
-				D6789CE426DE680600650863 /* Swinject.framework in Frameworks */,
-				D6789CE526DE680600650863 /* universalprofile_ios_sdk.framework in Frameworks */,
-				D6789CE626DE680600650863 /* web3swift.framework in Frameworks */,
+				D6BC42BD26E11CE500A62847 /* BigInt.framework in Frameworks */,
+				D6BC42D526E11CF300A62847 /* web3swift.framework in Frameworks */,
+				D6BC42D326E11CF200A62847 /* universalprofile_ios_sdk.framework in Frameworks */,
+				D6BC42D126E11CF100A62847 /* Swinject.framework in Frameworks */,
+				D6BC42CF26E11CEF00A62847 /* Starscream.framework in Frameworks */,
+				D6BC42C926E11CEC00A62847 /* RxSwift.framework in Frameworks */,
+				D6BC42CB26E11CED00A62847 /* secp256k1.framework in Frameworks */,
+				D6BC42C526E11CE900A62847 /* RxCocoa.framework in Frameworks */,
+				D6BC42C726E11CEB00A62847 /* RxRelay.framework in Frameworks */,
+				D6BC42BF26E11CE600A62847 /* CryptoSwift.framework in Frameworks */,
+				D6BC42C126E11CE700A62847 /* PromiseKit.framework in Frameworks */,
+				D6BC42C326E11CE800A62847 /* RxBlocking.framework in Frameworks */,
+				D6BC42BA26E11CE300A62847 /* Alamofire.framework in Frameworks */,
+				D6BC42CD26E11CEE00A62847 /* SipHash.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,7 +473,8 @@
 				D6DCA53B26CE50140035CC12 /* Frameworks */,
 				D6DCA53C26CE50140035CC12 /* Resources */,
 				D68B004A26D2D3EA008C9403 /* ShellScript */,
-				D68B006426D2D4FC008C9403 /* Embed Frameworks */,
+				D6BC42BC26E11CE400A62847 /* Embed Frameworks */,
+				D6CB845426E218E900D1E991 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -571,9 +570,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6DCA57226CE507F0035CC12 /* README.md in Resources */,
 				D6DCA54926CE50150035CC12 /* Preview Assets.xcassets in Resources */,
-				D68B00B526D4EA70008C9403 /* Cartfile in Resources */,
 				D6DCA54626CE50150035CC12 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -688,6 +685,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+		D6CB845426E218E900D1E991 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# skip if we run in debug\nif [ \"$CONFIGURATION\" == \"Debug\" ]; then\n    echo \"Skip frameworks cleaning in debug version\"\n    exit 0\nfi\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -909,6 +923,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"UP Sample/Preview Content\"";
 				DEVELOPMENT_TEAM = J968GMC2QA;
@@ -925,6 +940,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = future.agency.up.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_WORKSPACE = NO;
@@ -936,6 +952,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"UP Sample/Preview Content\"";
 				DEVELOPMENT_TEAM = J968GMC2QA;
@@ -952,6 +969,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = future.agency.up.sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_WORKSPACE = NO;
