@@ -27,10 +27,12 @@ struct ContentView: View {
                 Group {
                     Text("ERC725Key")
                         .font(.title3)
-                    Text(publicKey)
+                    // TODO: Why address is here?
+                    Text(address)
                     Text("ERC725Address")
                         .font(.title3)
-                    Text(address)
+                    // TODO: Why public key is here?
+                    Text(publicKey)
                 }
                 Divider()
                     .padding(.top, 16)
