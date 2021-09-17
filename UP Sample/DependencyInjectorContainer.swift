@@ -20,6 +20,7 @@ class DependencyInjectorContainer {
     private init() {
         container.register(KeyValueStore.self) { _ in DefaultKeyValueStore() }
         container.register(UPIpServiceEnvornment.self) { _ in TestIpServiceEnvornment() }
+        container.register(IPFSServiceEnvironment.self) { _ in TestIPFSServiceEnvironment() }
         container.register(UPIpService.self) { r in
             UPIpServiceImpl(environment: r.resolve(UPIpServiceEnvornment.self)!)
         }
@@ -36,17 +37,38 @@ class DependencyInjectorContainer {
         container.register(PasswordStore.self) { r in
             PasswordStore(keyValueStore: r.resolve(KeyValueStore.self)!)
         }
-        container.register(BaseFlowViewModel.self) { r in
+        container.register(IdentityProviderBaseFlowViewModel.self) { r in
             let web3Ks: Web3KeyStore = r.resolve(Web3KeyStore.self)!
             let signInUseCase = SignInUsecase(ipService: r.resolve(UPIpService.self)!,
-                          web3KeyStore: web3Ks,
-                          passwordStore: r.resolve(PasswordStore.self)!,
-                          authStore: r.resolve(AuthStore.self)!)
+                                              web3KeyStore: web3Ks,
+                                              passwordStore: r.resolve(PasswordStore.self)!,
+                                              authStore: r.resolve(AuthStore.self)!)
             
-            return BaseFlowViewModel(signInUsecase: signInUseCase,
+            return IdentityProviderBaseFlowViewModel(signInUsecase: signInUseCase,
                                      sampleResourceService: r.resolve(SampleResourceService.self)!,
                                      web3KeyStore: web3Ks)
         }
+        container.register(web3.self) { _ in
+            web3(provider: Web3HttpProvider(URL(string: Lukso.RPCTestNetwork)!)!)
+        }
+        container.register(LSP3ProfileProvider.self) { r in
+            let environment = r.resolve(IPFSServiceEnvironment.self)!
+            return LSP3ProfileProviderImpl(IPFSConfig(environment: environment), r.resolve(web3.self)!)
+        }
+        container.register(LSP3ProfileRepository.self) { r in
+            LSP3ProfileRepository(r.resolve(LSP3ProfileProvider.self)!,
+                                  r.resolve(KeyValueStore.self)!)
+        }
+        container.register(LSP3ProfileListViewModel.self) { r in
+            LSP3ProfileListViewModel(r.resolve(LSP3ProfileRepository.self)!)
+        }
+        container.register(LSP3CreateProfileViewModel.self) { r in
+            LSP3CreateProfileViewModel(r.resolve(LSP3ProfileRepository.self)!)
+        }
+        container.register(LSP3ProfileDetailsViewModel.self) { r in
+            LSP3ProfileDetailsViewModel(r.resolve(LSP3ProfileRepository.self)!)
+        }
+        
     }
     
     
@@ -58,3 +80,4 @@ class DependencyInjectorContainer {
         return INSTANCE.container.resolve(serviceType, name: name)
     }
 }
+
