@@ -1035,6 +1035,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D601905426F4AD9000F8BC0B /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D601905526F4AD9000F8BC0B /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D601905426F4AD9000F8BC0B /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		D601905726F4AD9000F8BC0B /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D601905426F4AD9000F8BC0B /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		D601905926F4AD9000F8BC0B /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D601905426F4AD9000F8BC0B /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D6DCA53626CE50140035CC12 /* Project object */;
 }
