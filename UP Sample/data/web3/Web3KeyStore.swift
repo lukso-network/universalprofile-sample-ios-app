@@ -23,10 +23,10 @@ class Web3KeyStore {
         self.keyValueStore = keyValueStore
     }
     
-    func loadOrGenerateDefaultKeyPair() -> Either<AppError, EthereumKeystoreV3> {
+    func loadOrGenerateDefaultKeyPair() -> Result<EthereumKeystoreV3, AppError> {
         let keyPairFileLocation = getKeyPairFileLocation()
 
-        if let fileLocation = keyPairFileLocation.right,
+        if let fileLocation = try? keyPairFileLocation.get(),
            !fileLocation.isEmpty,
            FileManager.default.fileExists(atPath: getValidPath().appendingPathComponent(fileLocation).path) {
             return loadKeyPairWithDefaultPassword()
@@ -37,20 +37,25 @@ class Web3KeyStore {
         
     }
     
-    private func getKeyPairFileLocation() -> Either<AppError, String> {
-        return Either<AppError, String>(right: keyValueStore.get(key: Web3KeyStore.KeyPairFileLocation) ?? "")
+    private func getKeyPairFileLocation() -> Result<String, AppError> {
+        return .success(keyValueStore.get(key: Web3KeyStore.KeyPairFileLocation) ?? "")
     }
     
-    private func loadKeyPairWithDefaultPassword() -> Either<AppError, EthereumKeystoreV3> {
-        guard let filename = getKeyPairFileLocation().right else { return Either(left: AppError.simpleError(msg: "Cound't load key pair with default password"))}
-        return loadKeyPair(password: Web3KeyStore.DefaultPassword, filename: filename)
+    private func loadKeyPairWithDefaultPassword() -> Result<EthereumKeystoreV3, AppError> {
+        do {
+            let filename = try getKeyPairFileLocation().get()
+            return loadKeyPair(password: Web3KeyStore.DefaultPassword, filename: filename)
+        } catch {
+            return .failure(AppError.simpleException(error: error))
+        }
+        return .failure(AppError.simpleError(msg: "Cound't load key pair with default password"))
     }
     
-    private func generateKeyPairWithDefaultPassword() -> Either<AppError, EthereumKeystoreV3> {
+    private func generateKeyPairWithDefaultPassword() -> Result<EthereumKeystoreV3, AppError> {
         return generateKeyPair(password: Web3KeyStore.DefaultPassword)
     }
     
-    private func generateKeyPair(password: String) -> Either<AppError, EthereumKeystoreV3> {
+    private func generateKeyPair(password: String) -> Result<EthereumKeystoreV3, AppError> {
         do {
             let keystore = try EthereumKeystoreV3(password: password)!
             let keyData = try JSONEncoder().encode(keystore.keystoreParams)
@@ -68,16 +73,16 @@ class Web3KeyStore {
             
             credentials = keystore
             
-            return Either(right: keystore)
+            return .success(keystore)
         } catch {
-            return Either(left: AppError.simpleException(error: error))
+            return .failure(AppError.simpleException(error: error))
         }
     }
         
     private func loadKeyPair(
         password: String,
         filename: String
-    ) -> Either<AppError, EthereumKeystoreV3> {
+    ) -> Result<EthereumKeystoreV3, AppError> {
         do {
             #if DEBUG
             NSLog("Loading device from \(filename) with pass \(password)")
@@ -91,9 +96,9 @@ class Web3KeyStore {
             
             credentials = EthereumKeystoreV3(keystoreParams)
             
-            return Either(right: credentials!)
+            return .success(credentials!)
         } catch {
-            return Either(left: AppError.simpleException(error: error))
+            return .failure(AppError.simpleException(error: error))
         }
     }
     

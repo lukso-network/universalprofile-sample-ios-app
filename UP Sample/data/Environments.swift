@@ -9,6 +9,16 @@
 import Foundation
 import universalprofile_ios_sdk
 
+class TestIPFSServiceEnvironment: IPFSServiceEnvironment {
+    func gatewayUrl() -> String {
+        return IPFSClientImpl.LUKSOIPFS_GATEWAY
+    }
+    
+    func clusterUrl() -> String {
+        return IPFSClientImpl.LUKSOIPFS_CLUSTER
+    }
+}
+
 class TestIpServiceEnvornment : UPIpServiceEnvornment {
     func baseUrl() -> String {
         return "http://35.246.184.226"

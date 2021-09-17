@@ -18,45 +18,46 @@ class PasswordStore {
         self.keyValueStore = keyValueStore
     }
 
-    func setPassword(password: String) -> Either<AppError, String> {
+    func setPassword(password: String) -> Result<String, AppError> {
         guard let hashedPassword = BCryptSwift.hashPassword(password, withSalt: BCryptSwift.generateSalt()) else {
-            return .appError(.simpleError(msg: "Failed to hash a password using BCrypt"))
+            return .failure(.simpleError(msg: "Failed to hash a password using BCrypt"))
         }
-        
 
         if keyValueStore.save(key: PasswordStore.PasswordKey, value: hashedPassword) {
             self.password = password
             return .success(password)
         } else {
-            return .appError(.simpleError(msg: "Couldn't save password"))
+            return .failure(.simpleError(msg: "Couldn't save password"))
         }
     }
 
-    func getCachedPassword() -> Either<AppError, String> {
-        guard let password = password else { return .appError(.itemNotFound) }
+    func getCachedPassword() -> Result<String, AppError> {
+        guard let password = password else { return .failure(.itemNotFound) }
         return .success(password)
     }
     
-    func hasPassword() -> Either<AppError, Bool> {
-        guard let passwordHashed = keyValueStore.get(key: PasswordStore.PasswordKey) else { return .appError(.itemNotFound) }
+    func hasPassword() -> Result<Bool, AppError> {
+        guard let passwordHashed = keyValueStore.get(key: PasswordStore.PasswordKey) else { return .failure(.itemNotFound) }
         return .success(!passwordHashed.isEmpty)
     }
 
-    func validateAndCachePassword(_ password: String) -> Either<AppError, Bool> {
+    func validateAndCachePassword(_ password: String) -> Result<Bool, AppError> {
         return validate(password)
     }
 
-    private func validate(_ password: String) -> Either<AppError, Bool> {
-        guard let hashedPassword = getHashedPassword().right else {
-            return .appError(.simpleError(msg: "Couldn't find hashed password"))
+    private func validate(_ password: String) -> Result<Bool, AppError> {
+        switch getHashedPassword() {
+            case .success(let hashedPassword):
+                return .success(BCryptSwift.verifyPassword(password, matchesHash: hashedPassword) == true)
+            case .failure(let error):
+                return .failure(error)
         }
-        return .success(BCryptSwift.verifyPassword(password, matchesHash: hashedPassword) == true)
     }
 
-    private func getHashedPassword() -> Either<AppError, String> {
+    private func getHashedPassword() -> Result<String, AppError> {
         guard let passwordHashed = keyValueStore.get(key: PasswordStore.PasswordKey),
               !passwordHashed.isEmpty
-              else { return .appError(.itemNotFound) }
+              else { return .failure(.itemNotFound) }
         return .success(passwordHashed)
     }
 }

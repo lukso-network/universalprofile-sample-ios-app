@@ -10,12 +10,14 @@ import Foundation
 import UIKit
 
 class UserAgent {
-    let header = String(format:"IPSampleApp/%@ (%@)",
+    private init() {}
+    
+    static let header = String(format:"IPSampleApp/%@ (%@)",
                         getApplicationVersionAndDate(), getDeviceInfo())
-    let platform = "ios"
-    let osBuild = UIDevice.current.systemVersion
-    let buildVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-    let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+    static let platform = "ios"
+    static let osBuild = UIDevice.current.systemVersion
+    static let buildVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    static let buildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
 }
 
 func getDeviceInfo() -> String {

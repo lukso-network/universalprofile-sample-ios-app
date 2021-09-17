@@ -25,10 +25,11 @@ class SampleResourceServiceImpl: SampleResourceService {
     }
     
     func getAuthorizationToken() -> String? {
-        return authStore.getToken().either { error in
-            return nil
-        } fnR: { token in
-            return token.token
+        switch authStore.getToken() {
+            case .success(let token):
+                return token.token
+            case .failure:
+                return nil
         }
     }
 
@@ -38,7 +39,7 @@ class SampleResourceServiceImpl: SampleResourceService {
         var requestUrl = URL(string: environment.baseUrl())!
         requestUrl.appendPathComponent("me")
         
-        var headers: HTTPHeaders = [.contentType("application/json")]
+        var headers: HTTPHeaders = [.contentType("application/json"), .userAgent(UserAgent.header)]
         if let token = getAuthorizationToken() {
             headers.add(.authorization(bearerToken: token))
         }
