@@ -256,4 +256,36 @@ public extension UIDevice {
     var deviceType: DeviceType {
         return DeviceType.current
     }
+
+    /// Returns `true` if the device has a notch
+    var hasNotch: Bool {
+        let notch = topNotch
+        if notch == 0 {
+            return false
+        }
+        
+        if UIDevice.current.orientation.isPortrait {
+            return notch >= 44
+        }
+        
+        return notch > 0
+    }
+    
+    var topNotch: CGFloat {
+        guard #available(iOS 11.0, *), let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return 0 }
+        if UIDevice.current.orientation.isPortrait {
+            return window.safeAreaInsets.top
+        } else {
+            return max(window.safeAreaInsets.right, window.safeAreaInsets.left)
+        }
+    }
+    
+    var bottomNotch: CGFloat {
+        guard #available(iOS 11.0, *), let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return 0 }
+        if UIDevice.current.orientation.isPortrait {
+            return window.safeAreaInsets.bottom
+        } else {
+            return max(window.safeAreaInsets.right, window.safeAreaInsets.left)
+        }
+    }
 }

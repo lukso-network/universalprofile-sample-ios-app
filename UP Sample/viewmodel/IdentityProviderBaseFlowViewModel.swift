@@ -1,5 +1,5 @@
 //
-//  BaseFlowViewModel.swift
+//  IdentityProviderBaseFlowViewModel.swift
 //  UP Sample
 //
 //  Created by JeneaVranceanu.
@@ -12,7 +12,7 @@ import RxRelay
 import web3swift
 import universalprofile_ios_sdk
 
-class BaseFlowViewModel {
+class IdentityProviderBaseFlowViewModel {
     
     private let signInUsecase: SignInUsecase
     private let sampleResourceService: SampleResourceService
@@ -35,12 +35,13 @@ class BaseFlowViewModel {
     func load() {
         progress.accept(true)
         
-        web3KeyStore.loadOrGenerateDefaultKeyPair().either { error in
-            self.onError(error)
-            self.progress.accept(false)
-        } fnR: { keystore in
-            self.onWalletFound(keystore)
-            self.progress.accept(false)
+        switch web3KeyStore.loadOrGenerateDefaultKeyPair() {
+            case .success(let keystore):
+                self.onWalletFound(keystore)
+                self.progress.accept(false)
+            case .failure(let error):
+                self.onError(error)
+                self.progress.accept(false)
         }
     }
     
@@ -50,12 +51,13 @@ class BaseFlowViewModel {
     
     func signIn() {
         progress.accept(true)
-        signInUsecase.signIn { response in
-            response.either { error in
-                self.onError(error)
-                self.progress.accept(false)
-            } fnR: { _ in
-                self.callMe()
+        signInUsecase.signIn { result in
+            switch result {
+                case .success:
+                    self.callMe()
+                case .failure(let error):
+                    self.onError(error)
+                    self.progress.accept(false)
             }
         }
     }

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ERC725IdentityView.swift
 //  UP Sample
 //
 //  Created by JeneaVranceanu.
@@ -8,11 +8,12 @@
 
 import SwiftUI
 import RxSwift
+import universalprofile_ios_sdk
 
-struct ContentView: View {
+struct ERC725IdentityView: View {
     
     let disposeBag = DisposeBag()
-    let viewModel = DependencyInjectorContainer.resolve(BaseFlowViewModel.self)!
+    let viewModel = DependencyInjectorContainer.resolve(IdentityProviderBaseFlowViewModel.self)!
     @State private var showProgress = false
     @State private var showToastAlert = false
     @State private var toastMessage: String? = nil
@@ -20,9 +21,10 @@ struct ContentView: View {
     @State private var address: String = "..."
     @State private var publicKey: String = "..."
     @State private var errorText: String = "..."
-
+    
     var body: some View {
-        TabView {
+        ZStack {
+            LinearGradient(.lightStart, .lightEnd)
             VStack(alignment: .leading) {
                 Group {
                     Text("ERC725Key")
@@ -61,33 +63,38 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                Button(myInfo == nil ? "Sign in" : "Call me again") {
+                Button(action: {
                     if myInfo == nil {
                         viewModel.signIn()
                     } else {
                         viewModel.callMe()
                     }
+                }) {
+                    Text(myInfo == nil ? "Sign in" : "Call me again")
+                        .font(.title3)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(.blue)
                 }
-                .padding(.all, 14)
-                .frame(maxWidth: .infinity)
-                .background(Color.blue)
-                .font(.title3)
-                .foregroundColor(.white)
-                .cornerRadius(12)
-                
-            }.frame(minWidth: 0, idealWidth: UIScreen.screenWidth, maxWidth: .infinity, minHeight: 0, idealHeight: .infinity, maxHeight: .infinity, alignment: .leading)
+                .buttonStyle(NeomorphicStyle.Button.standardRoundedRect)
+                .padding(16)
+            }.frame(idealWidth: UIScreen.screenWidth,
+                    maxWidth: .infinity,
+                    maxHeight: .infinity,
+                    alignment: .leading)
+            .background(Color.clear)
             .padding()
-            .tabItem {
-                Image("baseline_blur_circular_black_24pt")
-                Text("Anonymous")
-            }.alert(isPresented: $showToastAlert, content: {
+            .padding(.top, getTopPadding())
+            .padding(.bottom, getBottomPadding())
+            .alert(isPresented: $showToastAlert, content: {
                 Alert(
-                    title: Text("Hello!"),
+                    title: Text("Message"),
                     message: Text(toastMessage ?? ""),
                     dismissButton: .default(Text("Close"))
                 )
             })
-        }.onAppear {
+        }
+        .edgesIgnoringSafeArea(.all)
+        .onAppear {
             viewModel.progress
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { isInProgress in
@@ -135,14 +142,9 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
 
-extension UIScreen{
-    static let screenWidth = UIScreen.main.bounds.size.width
-    static let screenHeight = UIScreen.main.bounds.size.height
-    static let screenSize = UIScreen.main.bounds.size
+struct ERC725IdentityView_Previews: PreviewProvider {
+    static var previews: some View {
+        ERC725IdentityView()
+    }
 }
