@@ -34,20 +34,21 @@ class SignInUsecase {
      3. call token endpoint of ip
      4. verifies the token (unnecessary step)
      */
-    func signIn(_ responseHandler: @escaping (Either<AppError, UPUserIdentity>) -> Void) {
-        web3KeyStore.loadOrGenerateDefaultKeyPair().either { error in
-            responseHandler(.appError(error))
-        } fnR: { ethereumKeystore in
-            /// FIXME: - MUST NOT USE A STATIC CONSTANT PASSWORD!
-            self.startSignInProcessWithKey(ethereumKeystore, Web3KeyStore.DefaultPassword) { response in
-                responseHandler(response)
-            }
+    func signIn(_ responseHandler: @escaping (Result<UPUserIdentity, AppError>) -> Void) {
+        switch web3KeyStore.loadOrGenerateDefaultKeyPair() {
+            case .success(let ethereumKeystore):
+                /// FIXME: - MUST NOT USE A STATIC CONSTANT PASSWORD!
+                self.startSignInProcessWithKey(ethereumKeystore, Web3KeyStore.DefaultPassword) { response in
+                    responseHandler(response)
+                }
+            case .failure(let appError):
+                responseHandler(.failure(appError))
         }
     }
     
     private func startSignInProcessWithKey(_ keystore: EthereumKeystoreV3,
                                            _ keystorePassword: String,
-                                           _ responseHandler: @escaping (Either<AppError, UPUserIdentity>) -> Void) {
+                                           _ responseHandler: @escaping (Result<UPUserIdentity, AppError>) -> Void) {
         let body = UPRequestBodySignMessage(erc725Address: "",
                                           messageBase64: createRandomMessage())
         ipService.signMessage(body: body) { result in
@@ -57,30 +58,28 @@ class SignInUsecase {
                                                            keystore: keystore,
                                                            keystorePassword: keystorePassword)
 
-                    verificationResult.either { error in
-                        responseHandler(.appError(error))
-                    } fnR: { requestBodyToken in
-                        self.getAndValidateToken(requestBodyToken, responseHandler)
+                    switch verificationResult {
+                        case .success(let requestBodyToken):
+                            self.getAndValidateToken(requestBodyToken, responseHandler)
+                        case .failure(let appError):
+                            responseHandler(.failure(appError))
                     }
                 case .failure(let error):
-                    responseHandler(.appError(.simpleException(error: error)))
+                    responseHandler(.failure(.simpleException(error: error)))
 
             }
         }
     }
     
-    private func getAndValidateToken(_ requestBodyToken: UPRequestBodyToken, _ responseHandler: @escaping (Either<AppError, UPUserIdentity>) -> Void) {
+    private func getAndValidateToken(_ requestBodyToken: UPRequestBodyToken, _ responseHandler: @escaping (Result<UPUserIdentity, AppError>) -> Void) {
         
         func validateToken(_ token: UPToken) {
             let body = UPTokenRequestBody(token: token.token)
-            let data = try! JSONEncoder().encode(body)
-            let dataUtf8 = String(data: data, encoding: .utf8)!
-            NSLog(dataUtf8)
             
             var requestUrl = URL(string: "http://35.246.184.226")!
             requestUrl.appendPathComponent("api/v1/auth/token/verify")
             
-            let headers: HTTPHeaders = [.contentType("application/json")]
+            let headers: HTTPHeaders = [.contentType("application/json"), .userAgent(UserAgent.header)]
             AF.request(requestUrl, method: .post,
                        parameters: body,
                        encoder: JSONParameterEncoder(),
@@ -93,10 +92,10 @@ class SignInUsecase {
                                 let userIdentity = try JSONDecoder().decode(UPUserIdentity.self, from: Data(trimmedJson.bytes))
                                 responseHandler(.success(userIdentity))
                             } catch {
-                                responseHandler(.appError(.simpleException(error: error)))
+                                responseHandler(.failure(.simpleException(error: error)))
                             }
                         case .failure(let error):
-                            responseHandler(.appError(.simpleException(error: error)))
+                            responseHandler(.failure(.simpleException(error: error)))
                     }
                     
                 }
@@ -115,10 +114,10 @@ class SignInUsecase {
         ipService.token(body: requestBodyToken) { tokenResult in
             switch tokenResult {
                 case .success(let token):
-                    self.authStore.setToken(token)
+                    let _ = self.authStore.setToken(token)
                     validateToken(token)
                 case .failure(let error):
-                    responseHandler(.appError(.simpleException(error: error)))
+                    responseHandler(.failure(.simpleException(error: error)))
             }
         }
     }
@@ -133,7 +132,7 @@ func verifyIPSignatureAndCreateTokenRequest(
     response: UPResponseBodySignMessage,
     keystore: EthereumKeystoreV3,
     keystorePassword: String
-) -> Either<AppError, UPRequestBodyToken> {
+) -> Result<UPRequestBodyToken, AppError> {
     let verificationResult = UPIpUtils.verifyIPSignatureAndCreateTokenRequest(response: response,
                                                                             keystore: keystore,
                                                                             keystorePassword: keystorePassword)
@@ -142,6 +141,6 @@ func verifyIPSignatureAndCreateTokenRequest(
         case .success(let requestBodyToken):
             return .success(requestBodyToken)
         case .failure(let error):
-            return .appError(.simpleException(error: error))
+            return .failure(.simpleException(error: error))
     }
 }

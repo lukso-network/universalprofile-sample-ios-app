@@ -20,14 +20,14 @@ class AuthStore {
         self.keyValueStore = keyValueStore
     }
     
-    func getToken() -> Either<AppError, UPToken> {
+    func getToken() -> Result<UPToken, AppError> {
         if let token = token {
             NSLog("DB Token: \(token)")
             return .success(token)
         }
         
         guard let result = keyValueStore.get(key: AuthStore.KEY_TOKEN), !result.isEmpty else {
-            return .appError(.tokenNotFound)
+            return .failure(.tokenNotFound)
         }
         
         NSLog("Raw Token: \(result)")
@@ -38,11 +38,11 @@ class AuthStore {
             NSLog("DB Token decoded: \(token!)")
             return .success(token!)
         } catch  {
-            return .appError(.jsonMalFormed(error: error))
+            return .failure(.jsonMalFormed(error: error))
         }
     }
     
-    func setToken(_ token: UPToken) -> Either<AppError, UPToken> {
+    func setToken(_ token: UPToken) -> Result<UPToken, AppError> {
         NSLog("Setting Token: \(token)")
         
         do {
@@ -52,10 +52,10 @@ class AuthStore {
                 self.token = token
                 return .success(token)
             } else {
-                return .appError(.storageException(error: UPSimpleError("couldn't write value at key \(AuthStore.KEY_TOKEN)")))
+                return .failure(.storageException(error: UPSimpleError("couldn't write value at key \(AuthStore.KEY_TOKEN)")))
             }
         } catch {
-            return .appError(.jsonMalFormed(error: error))
+            return .failure(.jsonMalFormed(error: error))
         }
     }
 }

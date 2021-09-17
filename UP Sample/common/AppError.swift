@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum AppError {
+enum AppError: Error {
     case none(error: Error)
     case networkConnection(error: Error)
     case apiError(statusCode: Int, msg: String, error: Error)

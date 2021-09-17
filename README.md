@@ -22,13 +22,15 @@ You can use the solution down the link manually.
 -----------
 
 Here will be a collection of mappings between `web3j` (left) and `web3swift` (right):
-
-- `org.web3j.crypto.Sign.SignatureData` ==> `SECP256K1.UnmarshaledSignature`;
-- `org.web3j.crypto.Sign.signedMessageToKey` ==> `SECP256K1.recoverPublicKey`;
-- `org.web3j.crypto.Sign.signMessage` ==> `SECP256K1.signForRecovery`;
-- `org.web3j.crypto.Sign.recoverFromSignature` ==> `SECP256K1.recoverPublicKey`;
-- `org.web3j.crypto.WalletUtils.generateLightNewWalletFile` ==> No specific utility function. File is generated manually;
-- `org.web3j.crypto.WalletUtils.loadCredentials` ==> No specific utility function. File is read and parsed manually;
-- `org.web3j.crypto.WalletFile` ==> `KeystoreParamsV3` (also see `EthereumKeystoreV3` which is a wrapped for `KeystoreParamsV3`);
-- `org.web3j.crypto.ECKeyPair` ==> No specific class. Use `SECP256K1.generatePrivateKey()` and `SECP256K1.privateToPublic(privateKey: Data)`;
-- `org.web3j.crypto.Credentials` ==> `EthereumKeystoreV3`. Use `func getAddress() -> EthereumAddress?` or `var addresses: [EthereumAddress]?` to get information about addresses. `func UNSAFE_getPrivateKeyData(...) -> Data` can be used to return private key.
+| web3j | web3swift | Note |
+| ----- | --------- | ---- |
+| `org.web3j.crypto.Sign.SignatureData` | `SECP256K1.UnmarshaledSignature` | - |
+| `org.web3j.crypto.Sign.signedMessageToKey` | `SECP256K1.recoverPublicKey` | - |
+| `org.web3j.crypto.Sign.signMessage` | `SECP256K1.signForRecovery` | Message without `"Ethereum Signed Message"` prefix. |
+| `org.web3j.crypto.Sign.signPrefixedMessage` |`Web3Signer.signPersonalMessage`| Message with `"Ethereum Signed Message"` prefix. |
+| `org.web3j.crypto.Sign.recoverFromSignature` | `SECP256K1.recoverPublicKey` | - |
+| `org.web3j.crypto.WalletUtils.generateLightNewWalletFile` | No specific utility function | File should be generated manually |
+| `org.web3j.crypto.WalletUtils.loadCredentials` | No specific utility function | File should be read and parsed manually |
+| `org.web3j.crypto.WalletFile` | `KeystoreParamsV3` | Also see `EthereumKeystoreV3` which is a wrapper for `KeystoreParamsV3` |
+| `org.web3j.crypto.ECKeyPair` | No specific class | Use `SECP256K1.generatePrivateKey()` and `SECP256K1.privateToPublic(privateKey: Data)` |
+| `org.web3j.crypto.Credentials` | `EthereumKeystoreV3` | Use `func getAddress() -> EthereumAddress?` or `var addresses: [EthereumAddress]?` to get information about addresses. `func UNSAFE_getPrivateKeyData(...) -> Data` can be used to return private key |
