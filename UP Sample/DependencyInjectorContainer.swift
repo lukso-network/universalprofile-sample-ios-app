@@ -65,10 +65,9 @@ class DependencyInjectorContainer {
         container.register(LSP3CreateProfileViewModel.self) { r in
             LSP3CreateProfileViewModel(r.resolve(LSP3ProfileRepository.self)!)
         }
-        container.register(LSP3ProfileDetailsViewModel.self) { r in
-            LSP3ProfileDetailsViewModel(r.resolve(LSP3ProfileRepository.self)!)
+        container.register(LSP3ProfileSearchViewModel.self) { r in
+            LSP3ProfileSearchViewModel(r.resolve(LSP3ProfileRepository.self)!)
         }
-        
     }
     
     
