@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUI
 import RxRelay
+import RxSwift
 import Foundation
 import OrderedCollections
 import universalprofile_ios_sdk
@@ -17,7 +18,7 @@ class LSP3CreateProfileViewModel : ObservableObject {
     
     let progress = BehaviorRelay<Bool>(value: false)
     let errorEvent = PublishRelay<AppError>()
-    let lsp3Profile = BehaviorRelay<LSP3Profile?>(value: nil)
+    let lsp3Profile = BehaviorRelay<ConsumableEvent<LSP3Profile>?>(value: nil)
     
     @Published private(set) var tags = OrderedSet<LSP3ProfileTag>()
     @Published private(set) var links = OrderedSet<LSP3ProfileLink>()
@@ -90,7 +91,7 @@ class LSP3CreateProfileViewModel : ObservableObject {
             switch result {
                 case .success(let profile):
                     self.progress.accept(false)
-                    self.lsp3Profile.accept(profile)
+                    self.lsp3Profile.accept(.init(profile))
                 case .failure(let error):
                     self.onError(error)
             }
