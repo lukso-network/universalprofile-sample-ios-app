@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OrderedCollections
 import universalprofile_ios_sdk
 
 class LSP3ProfileRepository {
@@ -63,9 +64,9 @@ class LSP3ProfileRepository {
     
     func save(_ profile: LSP3Profile) -> Result<LSP3Profile, AppError> {
         return listDisk().flatMap { profiles in
-            var newProfiles = profiles
+            var newProfiles = OrderedSet(profiles)
             newProfiles.append(profile)
-            return saveList(list: newProfiles).flatMap { _ in
+            return saveList(list: newProfiles.elements).flatMap { _ in
                 return .success(profile)
             }.flatMapError { error in
                 return .failure(.simpleException(error: error))
@@ -97,7 +98,12 @@ class LSP3ProfileRepository {
     
     private func saveToDisk(_ profiles: [LSP3Profile]) -> Result<[LSP3Profile], AppError> {
         do {
-            let jsonData = try JSONEncoder().encode(profiles)
+            // All saved profiles must have valid ID as CID multihash or at least must not be empty.
+            let filteredProfiles = profiles.filter {
+                UPWeb3Utils.isIpfsCid($0.id) || !$0.id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            }
+            
+            let jsonData = try JSONEncoder().encode(filteredProfiles)
             let json = String(data: jsonData, encoding: .utf8)!
             if !keyValueStore.save(key: LSP3ProfileRepository.KeyLSP3Profiles, value: json) {
                 return .failure(.simpleError(msg: "Failed to save a list of profiles under key = \(LSP3ProfileRepository.KeyLSP3Profiles)"))
@@ -112,10 +118,9 @@ class LSP3ProfileRepository {
         provider.loadFromIPFS(lsp3Id) { result in
             switch result {
                 case .success(let profile):
-                    responseHandler(self.save(profile))
+                    responseHandler(self.save(profile.copy(id: lsp3Id)))
                 case .failure(let error):
                     responseHandler(.failure(.simpleException(error: error)))
-                    
             }
         }
     }
