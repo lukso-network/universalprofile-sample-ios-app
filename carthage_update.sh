@@ -19,7 +19,7 @@ then
 	echo "
 	# carthage.sh
 	# Usage example: ./carthage.sh build --platform iOS
-	# 
+	#
 
 	set -euo pipefail
 
@@ -43,8 +43,27 @@ then
 
 	chmod +x $FILE
 	export PATH=$PATH:$FILE
-	$FILE update --no-use-binaries --platform iOS
+	$FILE update --no-use-binaries --platform iOS $@
 else
-	carthage update --no-use-binaries --platform iOS
+	carthage update --no-use-binaries --platform iOS $@
 fi
 
+#
+# Rewrite carthage-copy-frameworks.xcfilelist.
+# Use "$(SRCROOT)/Carthage/Build/iOS/" prefix for each framework
+#
+# Rewrite output-carthage.xcfilelist
+# Use "$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/" prefix for each framework
+#
+declare -a frameworks=($(ls Carthage/Build/iOS/ | grep '.framework$'))
+carthage_copy_frameworks_file_content=""
+output_carthage_file_content=""
+for index in ${!frameworks[@]}
+    do
+        carthage_copy_frameworks_file_content=${carthage_copy_frameworks_file_content}'$(SRCROOT)/Carthage/Build/iOS/'${frameworks[$index]}'\n'
+        output_carthage_file_content=${output_carthage_file_content}'$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/'${frameworks[$index]}'\n'
+    done
+echo -e $carthage_copy_frameworks_file_content > carthage-copy-frameworks.xcfilelist
+echo "Updated carthage-copy-frameworks.xcfilelist"
+echo -e $output_carthage_file_content > output-carthage.xcfilelist
+echo "Updated output-carthage.xcfilelist"
