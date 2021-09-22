@@ -19,8 +19,8 @@ struct LSP3CreateProfileView: View {
     @State private var backdropImage: UIImage? = nil
     @State private var username: String = ""
     @State private var description: String = ""
-    @State private var newLinkTitle: String = "new new new"
-    @State private var newLinkUrl: String = "www.google.com"
+    @State private var newLinkTitle: String = ""
+    @State private var newLinkUrl: String = ""
     @State private var newTag: String = ""
     
     @State private var showToastAlert = false
@@ -32,6 +32,7 @@ struct LSP3CreateProfileView: View {
     var body: some View {
         ZStack {
             LinearGradient(.lightStart, .lightEnd)
+                .edgesIgnoringSafeArea(.all)
             
             ScrollView {
                 VStack {
@@ -40,6 +41,11 @@ struct LSP3CreateProfileView: View {
                         defaultTitleText("Name")
                         
                         defaultTextField("Must not be empty", text: $username)
+                            .textContentType(.name)
+                            .keyboardType(.alphabet)
+                            .autocapitalization(.words)
+                            .padding(.leading, 16)
+                            .padding(.trailing, 16)
                             .disableAutocorrection(true)
                         
                         defaultTitleText("Description")
@@ -50,14 +56,16 @@ struct LSP3CreateProfileView: View {
                             .padding(.trailing, 24)
                             .padding(.top, 8)
                             .padding(.bottom, 8)
-                            .background(NeomorphicStyle.TextField.standard)
+                            .background(NeomorphicStyle.TextField.standard
+                                            .padding(.leading, 16)
+                                            .padding(.trailing, 16))
                     }
                     
                     // Images group
                     Group {
                         defaultTitleText("Profile image")
                         
-                        HStack(alignment: .top)  {
+                        HStack(alignment: .top, spacing: 0) {
                             if let profileImage = profileImage {
                                 Image(uiImage: profileImage)
                                     .resizable()
@@ -96,7 +104,7 @@ struct LSP3CreateProfileView: View {
                         
                         defaultTitleText("Backdrop image")
                         
-                        HStack(alignment: .top) {
+                        HStack(alignment: .top, spacing: 0) {
                             if let backdropImage = backdropImage {
                                 Image(uiImage: backdropImage)
                                     .resizable()
@@ -138,6 +146,8 @@ struct LSP3CreateProfileView: View {
                         defaultTitleText("Tags")
                         
                         defaultTextField("New tag (use , to separate tags)", text: $newTag)
+                            .padding(.leading, 16)
+                            .padding(.trailing, 16)
                             .autocapitalization(.none)
                             .disableAutocorrection(true)
                         
@@ -162,7 +172,7 @@ struct LSP3CreateProfileView: View {
                             Divider()
                             
                             ForEach(viewModel.tags) { tag in
-                                HStack(alignment: VerticalAlignment.center) {
+                                HStack(alignment: VerticalAlignment.center, spacing: 0) {
                                     defaultTagText(tag.tag)
                                         .padding(.leading, 16)
                                         .padding(.trailing, 24)
@@ -191,7 +201,11 @@ struct LSP3CreateProfileView: View {
                         
                         VStack {
                             defaultTextField("New link title", text: $newLinkTitle)
+                                .padding(.leading, 16)
+                                .padding(.trailing, 16)
                             defaultTextField("New link URL", text: $newLinkUrl)
+                                .padding(.leading, 16)
+                                .padding(.trailing, 16)
                                 .textContentType(.URL)
                                 .keyboardType(.URL)
                                 .autocapitalization(.none)
@@ -222,32 +236,8 @@ struct LSP3CreateProfileView: View {
                             Divider()
                             
                             ForEach(viewModel.links) { link in
-                                HStack(alignment: VerticalAlignment.center) {
-                                    VStack(alignment: .leading) {
-                                        Text(link.title ?? "-")
-                                            .foregroundColor(.black.opacity(0.8))
-                                            .font(.subheadline.bold())
-                                            .padding(.top, 12)
-                                            .padding(.leading, 16)
-                                            .padding(.trailing, 16)
-                                        
-                                        Text(link.url ?? "-")
-                                            .foregroundColor(.blue)
-                                            .font(.subheadline)
-                                            .padding(.bottom, 12)
-                                            .padding(.leading, 16)
-                                            .padding(.trailing, 16)
-                                    }
-                                    .background(RoundedRectangle(cornerRadius: 12).fill(Color.white))
-                                    .padding(.leading, 16)
-                                    .padding(.trailing, 16)
-                                    .onTapGesture {
-                                        if let rawUrl = link.url,
-                                           let url = URL(string: rawUrl),
-                                           UIApplication.shared.canOpenURL(url) {
-                                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                                        }
-                                    }
+                                HStack(alignment: VerticalAlignment.center, spacing: 0) {
+                                    defaultLinkView(title: link.title, url: link.url)
                                     
                                     Spacer()
                                     
@@ -292,20 +282,24 @@ struct LSP3CreateProfileView: View {
                     .buttonStyle(NeomorphicStyle.Button.standardRoundedRect)
                     .padding(16)
                 }
-                .padding(.top, getTopPadding())
-                .padding(.bottom, getBottomPadding())
+//                .padding(.top, getTopPadding() + 16)
+//                .padding(.bottom, getBottomPadding() + 16)
             }
             .alert(isPresented: $showToastAlert, content: {
                 Alert(
                     title: Text(alertTitle),
                     message: Text(alertMessage),
-                    dismissButton: .default(Text("Close")) {
+                    dismissButton: .default(Text("Got it!")) {
                         showToastAlert = false
                     }
                 )
             })
+            
+            if showCreatingProfileProgress {
+                Color.black.opacity(0.25)
+            }
         }
-        .edgesIgnoringSafeArea(.all)
+        .disabled(showCreatingProfileProgress)
         .onAppear {
             UITextView.appearance().backgroundColor = .clear
             
@@ -327,8 +321,8 @@ struct LSP3CreateProfileView: View {
             
             viewModel.lsp3Profile
                 .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { createdProfile in
-                    if let _ = createdProfile {
+                .subscribe(onNext: { createdProfileEvent in
+                    if let _ = createdProfileEvent?.getIfNotConsumed() {
                         self.alertTitle = "Success!"
                         self.alertMessage = "Profile created successfully. You now should be able to see it in a \"Cached\" tab."
                         self.showToastAlert = true
@@ -352,45 +346,4 @@ struct LSP3CreateProfileView_Previews: PreviewProvider {
     static var previews: some View {
         LSP3CreateProfileView()
     }
-}
-
-func getTopPadding() -> CGFloat {
-    if UIDevice.current.hasNotch {
-        return UIDevice.current.topNotch
-    } else {
-        return 16
-    }
-}
-
-func getBottomPadding() -> CGFloat {
-    if UIDevice.current.hasNotch {
-        return UIDevice.current.bottomNotch + 48
-    } else {
-        return 64
-    }
-}
-
-func defaultTextField(_ hint: String = "", text: Binding<String>) -> some View {
-    return TextField(hint, text: text)
-        .padding(.top, 16)
-        .padding(.bottom, 16)
-        .padding(.leading, 32)
-        .padding(.trailing, 32)
-        .background(NeomorphicStyle.TextField.standard)
-}
-
-func defaultTitleText(_ title: String = "") -> some View {
-    return Text(title)
-        .font(.caption2)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.top, 12)
-        .padding(.leading, 24)
-}
-
-func defaultTagText(_ tag: String = "") -> some View {
-    return Text(tag)
-        .font(.subheadline)
-        .foregroundColor(Color.white)
-        .padding(8)
-        .background(RoundedRectangle(cornerRadius: 12).fill(LinearGradient(Color.purple.opacity(0.5), Color.blue)))
 }
