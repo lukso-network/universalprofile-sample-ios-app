@@ -184,41 +184,4 @@ struct LSP3ProfilesListView_Previews: PreviewProvider {
     }
 }
 
-struct MyAsyncImage: View {
-    @ObservedObject var imageLoader: ImageLoader
-    @State var image:UIImage = UIImage()
-    @State private var isLoading = true
-    private let defaultImage: UIImage?
-    
-    init(withURL url: String, defaultImage: UIImage? = nil) {
-        imageLoader = ImageLoader(urlString: url)
-        self.defaultImage = defaultImage
-    }
-    
-    var body: some View {
-        ZStack {
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFill()
-                .onReceive(imageLoader.didChange) { data in
-                    self.isLoading = false
-                    if let data = data, let image = UIImage(data: data) {
-                        self.image = image
-                    } else if let defaultImage = defaultImage {
-                        self.image = defaultImage
-                    }
-                }
-            
-            if isLoading {
-                ProgressView()
-            }
-        }
-    }
-}
 
-
-extension String: Identifiable {
-    public var id: String {
-        return self
-    }
-}
