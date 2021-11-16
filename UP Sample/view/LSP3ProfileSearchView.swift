@@ -8,22 +8,14 @@
 
 import SwiftUI
 import UIKit
-import RxRelay
-import RxSwift
 import universalprofile_ios_sdk
 
 struct LSP3ProfileSearchView: View {
     
-    private let viewModel = DependencyInjectorContainer.resolve(LSP3ProfileSearchViewModel.self)!
-    
-    @State private var profile: IdentifiableLSP3Profile? = nil
+    @StateObject private var viewModel = DependencyInjectorContainer.resolve(LSP3ProfileSearchViewModel.self)!
+
     @State private var erc725OrHash = "QmbKW24R7iHbBQDAeU5ekL7qtRX2hxmgDCijTVnLafEb88"
     @State private var isSearchButtonEnabled = true
-    @State private var showAlert = false
-    @State private var alertMessage: String? = nil
-    @State private var showProgress = false
-    
-    let disposeBag = DisposeBag()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -41,9 +33,9 @@ struct LSP3ProfileSearchView: View {
             }
             .padding(16)
             
-            if showProgress {
+            if viewModel.showProgress {
                 ProgressView()
-            } else if let profile = profile {
+            } else if let profile = viewModel.profile {
                 NavigationLink(destination: LSP3ProfileDetailsView(lsp3ProfileCid: profile.id)) {
                     LSP3ProfileView(profile: profile)
                 }.accentColor(Color.black)
@@ -64,30 +56,6 @@ struct LSP3ProfileSearchView: View {
                         .shadow(color: .white.opacity(0.7), radius: 10, x: -2, y: -2))
         .padding(.leading, 16)
         .padding(.trailing, 16)
-        .onAppear {
-            viewModel.progress
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { isInProgress in
-                    self.showProgress = isInProgress
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-            
-            viewModel.lsp3Profile
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { profile in
-                    self.profile = profile
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-            
-            viewModel.errorEvent
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { error in
-                    self.profile = nil
-                    self.alertMessage = error.localizedDescription
-                    self.showAlert = true
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-        }
     }
 }
 

@@ -7,13 +7,9 @@
 //
 
 import SwiftUI
-import RxSwift
 import universalprofile_ios_sdk
 
 struct LSP3CreateProfileView: View {
-    private static let CREATE_PROFILE_STATUS_VIEW_TAG = "CREATE_PROFILE_STATUS_VIEW_TAG"
-    
-    private let disposeBag = DisposeBag()
     @ObservedObject private var viewModel = DependencyInjectorContainer.resolve(LSP3CreateProfileViewModel.self)!
     @State private var showingProfileImagePicker = false
     @State private var showingBackdropImagePicker = false
@@ -24,14 +20,6 @@ struct LSP3CreateProfileView: View {
     @State private var newLinkTitle: String = ""
     @State private var newLinkUrl: String = ""
     @State private var newTag: String = ""
-    
-    @State private var navigationLinkSelection: String? = nil
-    
-    @State private var showToastAlert = false
-    @State private var alertTitle = ""
-    @State private var alertMessage = ""
-    
-    @State private var showCreatingProfileProgress = false
     
     var body: some View {
         ZStack {
@@ -157,9 +145,9 @@ struct LSP3CreateProfileView: View {
                         
                         Button(action: {
                             if newTag.isEmpty {
-                                alertTitle = "Invalid new tag"
-                                alertMessage = "New tag cannot be empty"
-                                showToastAlert = true
+                                viewModel.alertTitle = "Invalid new tag"
+                                viewModel.alertMessage = "New tag cannot be empty"
+                                viewModel.showToastAlert = true
                             } else {
                                 newTag.split(separator: ",").forEach { tag in
                                     viewModel.appendNewTag(String(tag).trimmingCharacters(in: .whitespacesAndNewlines))
@@ -218,13 +206,13 @@ struct LSP3CreateProfileView: View {
                         
                         Button(action: {
                             if newLinkTitle.isEmpty {
-                                alertTitle = "Invalid new link"
-                                alertMessage = "Link title should not be empty"
-                                showToastAlert = true
+                                viewModel.alertTitle = "Invalid new link"
+                                viewModel.alertMessage = "Link title should not be empty"
+                                viewModel.showToastAlert = true
                             } else if URL(string: newLinkUrl) == nil {
-                                alertTitle = "Invalid new link"
-                                alertMessage = "Link URL is invalid (cannot be parsed)"
-                                showToastAlert = true
+                                viewModel.alertTitle = "Invalid new link"
+                                viewModel.alertMessage = "Link URL is invalid (cannot be parsed)"
+                                viewModel.showToastAlert = true
                             } else {
                                 viewModel.appendNewLink(newLinkTitle, newLinkUrl)
                                 newLinkTitle = ""
@@ -262,9 +250,9 @@ struct LSP3CreateProfileView: View {
                     
                     Button(action: {
                         if username.isEmpty {
-                            alertTitle = "Error"
-                            alertMessage = "Username must not be empty"
-                            showToastAlert = true
+                            viewModel.alertTitle = "Error"
+                            viewModel.alertMessage = "Username must not be empty"
+                            viewModel.showToastAlert = true
                         } else {
                             viewModel.createLsp3RequestBuilder.name = username
                             viewModel.createLsp3RequestBuilder.description = description
@@ -277,71 +265,41 @@ struct LSP3CreateProfileView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(.blue)
                             
-                            if showCreatingProfileProgress {
+                            if viewModel.progress {
                                 ProgressView()
                             }
                         }
                     }
-                    .disabled(showCreatingProfileProgress)
+                    .disabled(viewModel.progress)
                     .buttonStyle(NeomorphicStyle.Button.standardRoundedRect)
                     .padding(16)
                     
                     let destination = LSP3CreateProfileStatusView(viewModel)
                         .navigationTitle("Creating profile")
                         .navigationBarBackButtonHidden(true)
-                    
-                    NavigationLink(destination: destination,
-                                   tag: LSP3CreateProfileView.CREATE_PROFILE_STATUS_VIEW_TAG,
-                                   selection: $navigationLinkSelection) {
+
+                    NavigationLink(destination: destination, isActive: $viewModel.showProfileDeploymentStatusView) {
                         EmptyView()
                     }
                 }
             }
-            .alert(isPresented: $showToastAlert, content: {
+            .alert(isPresented: $viewModel.showToastAlert, content: {
                 Alert(
-                    title: Text(alertTitle),
-                    message: Text(alertMessage),
+                    title: Text(viewModel.alertTitle),
+                    message: Text(viewModel.alertMessage),
                     dismissButton: .default(Text("Got it!")) {
-                        showToastAlert = false
+                        viewModel.showToastAlert = false
                     }
                 )
             })
             
-            if showCreatingProfileProgress {
+            if viewModel.progress {
                 Color.black.opacity(0.25)
             }
         }
-        .disabled(showCreatingProfileProgress)
+        .disabled(viewModel.progress)
         .onAppear {
             UITextView.appearance().backgroundColor = .clear
-            
-            viewModel.progress
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { progress in
-                    self.showCreatingProfileProgress = progress
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-            
-            viewModel.errorEvent
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { error in
-                    self.alertTitle = "Error"
-                    self.alertMessage = error.description()
-                    self.showToastAlert = true
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-            
-            viewModel.identifiableLsp3Profile
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { createdProfileEvent in
-                    if let _ = createdProfileEvent?.getIfNotConsumed() {
-//                        self.alertTitle = "Success!"
-//                        self.alertMessage = "Profile created successfully. You now should be able to see it in a \"Cached\" tab."
-//                        self.showToastAlert = true
-                        navigationLinkSelection = LSP3CreateProfileView.CREATE_PROFILE_STATUS_VIEW_TAG
-                    }
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
         }
     }
     

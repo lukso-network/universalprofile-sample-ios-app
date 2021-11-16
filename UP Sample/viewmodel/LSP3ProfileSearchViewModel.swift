@@ -7,15 +7,16 @@
 //
 
 import Foundation
-import RxRelay
-import RxSwift
+import SwiftUI
 import universalprofile_ios_sdk
 
-class LSP3ProfileSearchViewModel {
+class LSP3ProfileSearchViewModel: ObservableObject {
     
-    let progress = BehaviorRelay<Bool>(value: false)
-    let errorEvent = PublishRelay<AppError>()
-    let lsp3Profile = BehaviorRelay<IdentifiableLSP3Profile?>(value: nil)
+    @Published private(set) var profile: IdentifiableLSP3Profile? = nil
+    @Published var showAlert = false
+    @Published private(set) var alertMessage: String? = nil
+    @Published var showProgress = false
+    @Published private(set) var errorEvent: AppError? = nil
     
     private let lsp3ProfileRepository: LSP3ProfileRepository
     
@@ -27,14 +28,14 @@ class LSP3ProfileSearchViewModel {
         if UPWeb3Utils.isAddress(input) {
             // Search on a blockchain
             // FIXME: search on blockchain
-            lsp3Profile.accept(IdentifiableLSP3Profile(id: "1",
-                                                       lsp3Profile: LSP3Profile(name: "An attempt to search on blockchain", description: "You entered a valid address", links: [], tags: [], profileImage: [], backgroundImage: [])))
+            profile = IdentifiableLSP3Profile(id: "1",
+                                                       lsp3Profile: LSP3Profile(name: "An attempt to search on blockchain", description: "You entered a valid address", links: [], tags: [], profileImage: [], backgroundImage: []))
         } else if UPWeb3Utils.isIpfsCid(input) {
             // Search on IPFS
             searchOnIPFS(input)
         } else {
             NSLog("Invalid input. Not an ethereum address or IPFS CID")
-            errorEvent.accept(.simpleError(msg: "Invalid input. Not an ethereum address or IPFS CID."))
+            onError(.simpleError(msg: "Invalid input. Not an ethereum address or IPFS CID."))
         }
     }
     
@@ -43,7 +44,7 @@ class LSP3ProfileSearchViewModel {
             switch result {
                 case .success(let profile):
                     let _ = self.lsp3ProfileRepository.save(profile)
-                    self.lsp3Profile.accept(profile)
+                    self.profile = profile
                 case .failure(let error):
                     self.onError(error)
             }
@@ -51,8 +52,11 @@ class LSP3ProfileSearchViewModel {
     }
     
     private func onError(_ error: AppError) {
-        progress.accept(false)
         NSLog(error.description())
-        errorEvent.accept(error)
+        showProgress = false
+        errorEvent = error
+        profile = nil
+        alertMessage = error.description()
+        showAlert = true
     }
 }

@@ -8,8 +8,6 @@
 
 import UIKit
 import SwiftUI
-import RxRelay
-import RxSwift
 import web3swift
 import Foundation
 import OrderedCollections
@@ -17,12 +15,18 @@ import universalprofile_ios_sdk
 
 class LSP3CreateProfileViewModel : ObservableObject {
     
-    let progressMessage = BehaviorRelay<String>(value: "")
-    let progress = BehaviorRelay<Bool>(value: false)
-    let errorEvent = PublishRelay<AppError>()
-    let identifiableLsp3Profile = BehaviorRelay<ConsumableEvent<IdentifiableLSP3Profile>?>(value: nil)
-    let universalProfile = BehaviorRelay<ConsumableEvent<DeployLSP3ProfileResponse>?>(value: nil)
-    let taskStatus = BehaviorRelay<ConsumableEvent<LSP3ProfileDeployTaskResponse>?>(value: nil)
+    @Published private (set) var progressMessage = ""
+    @Published private (set) var progress = false
+    @Published private (set) var errorEvent: AppError? = nil
+    @Published private (set) var identifiableLsp3Profile: IdentifiableLSP3Profile? = nil
+    @Published private (set) var universalProfile: DeployLSP3ProfileResponse? = nil
+    @Published private (set) var taskStatus: LSP3ProfileDeployTaskResponse? = nil
+    
+    @Published var showProfileDeploymentStatusView = false
+    @Published var showToastAlert = false
+    @Published var alertTitle = ""
+    @Published var alertMessage = ""
+    
     
     @Published private(set) var tags = OrderedSet<LSP3ProfileTag>()
     @Published private(set) var links = OrderedSet<LSP3ProfileLink>()
@@ -83,17 +87,21 @@ class LSP3CreateProfileViewModel : ObservableObject {
     }
     
     private func onError(_ error: AppError) {
-        progress.accept(false)
+        progress = false
         NSLog(error.description())
-        errorEvent.accept(error)
+        errorEvent = error
+        // Make it more meaningful
+        alertTitle = "Error"
+        alertMessage = error.description()
+        showToastAlert = true
     }
     
     func create() {
-        guard !progress.value else {
+        guard !progress else {
             return
         }
         
-        progress.accept(true)
+        progress = true
         
         createLsp3RequestBuilder.links = links.elements
         createLsp3RequestBuilder.tags = tags.map { $0.tag }
@@ -101,13 +109,14 @@ class LSP3CreateProfileViewModel : ObservableObject {
         lsp3ProfileRepository.create(createLsp3RequestBuilder.build()) { result in
             switch result {
                 case .success(let profile):
-                    self.progress.accept(false)
-                    self.progressMessage.accept("Profile created.\nDeploying smart contracts...")
-                    self.identifiableLsp3Profile.accept(.init(profile))
+                    self.progressMessage = "Profile created.\nDeploying smart contracts..."
+                    self.identifiableLsp3Profile = profile
+                    self.showProfileDeploymentStatusView = true
                     self.deploySmartContracts(profile)
                 case .failure(let error):
                     self.onError(error)
             }
+            self.progress = false
         }
     }
     

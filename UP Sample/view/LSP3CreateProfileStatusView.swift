@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import RxSwift
 import universalprofile_ios_sdk
 
 struct LSP3CreateProfileStatusView: View {
@@ -18,8 +17,6 @@ struct LSP3CreateProfileStatusView: View {
     @State private var identifiableLsp3Profile: IdentifiableLSP3Profile? = nil
     @State private var message: String = ""
     @State private var error: AppError? = nil
-    
-    private let disposeBag = DisposeBag()
     
     init(_ viewModel: LSP3CreateProfileViewModel) {
         self.viewModel = viewModel
@@ -122,47 +119,6 @@ struct LSP3CreateProfileStatusView: View {
                 .padding(.leading, 16)
                 .padding(.trailing, 16)
             }
-        }.onAppear {
-            viewModel.progressMessage
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { message in
-                    self.message = message
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-            
-            viewModel.errorEvent
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { error in
-                    self.error = error
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-            
-            viewModel.taskStatus
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { taskStatus in
-                    if let taskStatus = taskStatus?.getIfNotConsumed() {
-                        self.taskStatus = taskStatus
-                    }
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-            
-            viewModel.identifiableLsp3Profile
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { createdProfileEvent in
-                    if let identifiableLsp3Profile = createdProfileEvent?.get() {
-                        self.identifiableLsp3Profile = identifiableLsp3Profile
-                    }
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-            
-            viewModel.universalProfile
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { universalProfile in
-                    if let profile = universalProfile?.getIfNotConsumed() {
-                        self.universalProfile = profile
-                    }
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
         }
     }
     
@@ -207,5 +163,3 @@ struct LSP3CreateProfileStatusView: View {
 //        LSP3CreateProfileStatusView()
 //    }
 //}
-
-

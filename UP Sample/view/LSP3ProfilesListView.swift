@@ -7,20 +7,14 @@
 //
 
 import SwiftUI
-import RxSwift
 import universalprofile_ios_sdk
 
 struct LSP3ProfilesListView: View {
-    let disposeBag = DisposeBag()
-    let viewModel = DependencyInjectorContainer.resolve(LSP3ProfileListViewModel.self)!
+    
+    @StateObject private var viewModel = DependencyInjectorContainer.resolve(LSP3ProfileListViewModel.self)!
     
     @State private var fileHash = "QmaufE68Q6cdnFJk6VQvvkXgqP3x8Hfp8bhqrjijeRHrnh"
     @State private var isSearchButtonEnabled = true
-    @State private var profiles: [IdentifiableLSP3Profile] = []
-    
-    @State private var showAlert = false
-    @State private var alertMessage: String? = nil
-    @State private var showProgress = false
     
     var body: some View {
         ZStack {
@@ -59,7 +53,7 @@ struct LSP3ProfilesListView: View {
                         .foregroundColor(.black.opacity(0.7))
                     ScrollView {
                         VStack(spacing: 0) {
-                            ForEach(profiles, id: \.self) { profile in
+                            ForEach(viewModel.profiles, id: \.self) { profile in
                                 NavigationLink(destination: LSP3ProfileDetailsView(lsp3ProfileCid: profile.id)) {
                                     LSP3ProfileRowView(profile: profile)
                                         .padding(.leading, 8)
@@ -73,28 +67,6 @@ struct LSP3ProfilesListView: View {
             }
         }
         .onAppear {
-            viewModel.progress
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { isInProgress in
-                    self.showProgress = isInProgress
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-            
-            viewModel.lsp3Profiles
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { profiles in
-                    self.profiles = profiles
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-            
-            viewModel.errorEvent
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { error in
-                    self.alertMessage = error.localizedDescription
-                    self.showAlert = true
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-            
             viewModel.load()
         }
     }

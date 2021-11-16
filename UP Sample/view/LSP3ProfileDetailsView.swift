@@ -7,13 +7,9 @@
 //
 
 import SwiftUI
-import RxSwift
 import universalprofile_ios_sdk
 
 struct LSP3ProfileDetailsView: View {
-    
-    private let disposeBag = DisposeBag()
-    @State private var profile: IdentifiableLSP3Profile? = nil
     
     @State private var appeared = false
     @State private var viewModel: LSP3ProfileDetailsViewModel!
@@ -38,7 +34,7 @@ struct LSP3ProfileDetailsView: View {
                             .font(.body)
                             .foregroundColor(Color.red.opacity(0.75))
                             .padding()
-                    } else if let profile = profile {
+                    } else if let profile = viewModel.profile {
                         createProfileView(profile)
                     }
                     
@@ -59,13 +55,6 @@ struct LSP3ProfileDetailsView: View {
                 viewModel = LSP3ProfileDetailsViewModel(DependencyInjectorContainer.resolve(LSP3ProfileRepository.self)!)
                 appeared = true
             }
-            
-            viewModel?.lsp3Profile
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { profile in
-                    self.profile = profile
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
             
             viewModel?.load(lsp3ProfileCid)
         }

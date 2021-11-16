@@ -7,16 +7,16 @@
 //
 
 import Foundation
-import RxSwift
-import RxRelay
+import SwiftUI
 import universalprofile_ios_sdk
 
-class LSP3ProfileListViewModel {
+class LSP3ProfileListViewModel: ObservableObject {
     private let lsp3ProfileRepository: LSP3ProfileRepository
     
-    let progress = BehaviorRelay<Bool>(value: false)
-    let errorEvent = PublishRelay<AppError>()
-    let lsp3Profiles = BehaviorRelay<[IdentifiableLSP3Profile]>(value: [])
+    @Published private (set) var profiles: [IdentifiableLSP3Profile] = []
+    @Published private (set) var showAlert = false
+    @Published private (set) var alertMessage: String? = nil
+    @Published private (set) var showProgress = false
     
     init(_ lsp3ProfileRepository: LSP3ProfileRepository) {
         self.lsp3ProfileRepository = lsp3ProfileRepository
@@ -25,28 +25,29 @@ class LSP3ProfileListViewModel {
     func load() {
         switch lsp3ProfileRepository.list() {
             case .success(let profiles):
-                self.lsp3Profiles.accept(profiles)
+                self.profiles = profiles
             case .failure(let error):
                 self.onError(error)
         }
     }
     
     private func onError(_ error: AppError) {
-        progress.accept(false)
-        NSLog(error.description())
-        errorEvent.accept(error)
+        alertMessage = error.description()
+        showAlert = true
     }
     
     func searchProfile(_ lsp3Id: String) {
+        showProgress = true
         lsp3ProfileRepository.search(lsp3Id: lsp3Id) { result in
             switch result {
                 case .success(let profile):
-                    var profiles = self.lsp3Profiles.value
+                    var profiles = self.profiles
                     profiles.append(profile)
-                    self.lsp3Profiles.accept(profiles)
+                    self.profiles = profiles
                 case .failure(let error):
                     self.onError(error)
             }
+            self.showProgress = false
         }
     }
 }
