@@ -207,6 +207,10 @@
 		D6AA610F2743F6D300EE6201 /* Starscream.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA60C92743F6AA00EE6201 /* Starscream.xcframework */; };
 		D6AA61102743F6D300EE6201 /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA60CE2743F6AA00EE6201 /* Swinject.xcframework */; };
 		D6AA61112743F6D300EE6201 /* web3swift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA60C82743F6AA00EE6201 /* web3swift.xcframework */; };
+		D6AA611527440D5900EE6201 /* universalprofile_ios_sdk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA611227440D4F00EE6201 /* universalprofile_ios_sdk.xcframework */; };
+		D6AA611627440D5F00EE6201 /* universalprofile_ios_sdk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA611227440D4F00EE6201 /* universalprofile_ios_sdk.xcframework */; };
+		D6AA611727440DD000EE6201 /* universalprofile_ios_sdk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA611227440D4F00EE6201 /* universalprofile_ios_sdk.xcframework */; };
+		D6AA611827440DD000EE6201 /* universalprofile_ios_sdk.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA611227440D4F00EE6201 /* universalprofile_ios_sdk.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6DCA54226CE50140035CC12 /* UP_SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DCA54126CE50140035CC12 /* UP_SampleApp.swift */; };
 		D6DCA54426CE50140035CC12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DCA54326CE50140035CC12 /* ContentView.swift */; };
 		D6DCA54626CE50150035CC12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6DCA54526CE50150035CC12 /* Assets.xcassets */; };
@@ -242,6 +246,7 @@
 				D6AA60E42743F6AB00EE6201 /* ApolloWebSocket.xcframework in Embed Frameworks */,
 				D6AA60F22743F6AC00EE6201 /* SipHash.xcframework in Embed Frameworks */,
 				D6AA60DE2743F6AB00EE6201 /* Alamofire.xcframework in Embed Frameworks */,
+				D6AA611827440DD000EE6201 /* universalprofile_ios_sdk.xcframework in Embed Frameworks */,
 				D6AA60D82743F6AB00EE6201 /* ApolloSQLite.xcframework in Embed Frameworks */,
 				D6AA60D62743F6AB00EE6201 /* ApolloAPI.xcframework in Embed Frameworks */,
 				D6AA60E62743F6AB00EE6201 /* Swinject.xcframework in Embed Frameworks */,
@@ -437,6 +442,7 @@
 		D6AA60D22743F6AB00EE6201 /* Apollo.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Apollo.xcframework; path = Carthage/Build/Apollo.xcframework; sourceTree = "<group>"; };
 		D6AA60D32743F6AB00EE6201 /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxBlocking.xcframework; path = Carthage/Build/RxBlocking.xcframework; sourceTree = "<group>"; };
 		D6AA60D42743F6AB00EE6201 /* SipHash.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SipHash.xcframework; path = Carthage/Build/SipHash.xcframework; sourceTree = "<group>"; };
+		D6AA611227440D4F00EE6201 /* universalprofile_ios_sdk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = universalprofile_ios_sdk.xcframework; path = Carthage/Build/universalprofile_ios_sdk.xcframework; sourceTree = "<group>"; };
 		D6DCA53E26CE50140035CC12 /* UP Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UP Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6DCA54126CE50140035CC12 /* UP_SampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UP_SampleApp.swift; sourceTree = "<group>"; };
 		D6DCA54326CE50140035CC12 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -457,6 +463,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6AA611727440DD000EE6201 /* universalprofile_ios_sdk.xcframework in Frameworks */,
 				D6AA60ED2743F6AC00EE6201 /* Apollo.xcframework in Frameworks */,
 				D601905626F4AD9000F8BC0B /* OrderedCollections in Frameworks */,
 				D6AA60E72743F6AB00EE6201 /* BigInt.xcframework in Frameworks */,
@@ -481,6 +488,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6AA611527440D5900EE6201 /* universalprofile_ios_sdk.xcframework in Frameworks */,
 				D6AA60F42743F6C800EE6201 /* Alamofire.xcframework in Frameworks */,
 				D6AA60F52743F6C800EE6201 /* Apollo.xcframework in Frameworks */,
 				D6AA60F62743F6C800EE6201 /* ApolloAPI.xcframework in Frameworks */,
@@ -503,6 +511,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6AA611627440D5F00EE6201 /* universalprofile_ios_sdk.xcframework in Frameworks */,
 				D6AA61032743F6D200EE6201 /* Alamofire.xcframework in Frameworks */,
 				D6AA61042743F6D200EE6201 /* Apollo.xcframework in Frameworks */,
 				D6AA61052743F6D200EE6201 /* ApolloAPI.xcframework in Frameworks */,
@@ -681,6 +690,7 @@
 		D68B004B26D2D4FC008C9403 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D6AA611227440D4F00EE6201 /* universalprofile_ios_sdk.xcframework */,
 				D6AA60CA2743F6AA00EE6201 /* Alamofire.xcframework */,
 				D6AA60D22743F6AB00EE6201 /* Apollo.xcframework */,
 				D6AA60C62743F6AA00EE6201 /* ApolloAPI.xcframework */,
