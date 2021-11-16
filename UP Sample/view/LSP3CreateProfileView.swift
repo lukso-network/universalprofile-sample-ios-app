@@ -11,6 +11,8 @@ import RxSwift
 import universalprofile_ios_sdk
 
 struct LSP3CreateProfileView: View {
+    private static let CREATE_PROFILE_STATUS_VIEW_TAG = "CREATE_PROFILE_STATUS_VIEW_TAG"
+    
     private let disposeBag = DisposeBag()
     @ObservedObject private var viewModel = DependencyInjectorContainer.resolve(LSP3CreateProfileViewModel.self)!
     @State private var showingProfileImagePicker = false
@@ -22,6 +24,8 @@ struct LSP3CreateProfileView: View {
     @State private var newLinkTitle: String = ""
     @State private var newLinkUrl: String = ""
     @State private var newTag: String = ""
+    
+    @State private var navigationLinkSelection: String? = nil
     
     @State private var showToastAlert = false
     @State private var alertTitle = ""
@@ -281,9 +285,17 @@ struct LSP3CreateProfileView: View {
                     .disabled(showCreatingProfileProgress)
                     .buttonStyle(NeomorphicStyle.Button.standardRoundedRect)
                     .padding(16)
+                    
+                    let destination = LSP3CreateProfileStatusView(viewModel)
+                        .navigationTitle("Creating profile")
+                        .navigationBarBackButtonHidden(true)
+                    
+                    NavigationLink(destination: destination,
+                                   tag: LSP3CreateProfileView.CREATE_PROFILE_STATUS_VIEW_TAG,
+                                   selection: $navigationLinkSelection) {
+                        EmptyView()
+                    }
                 }
-//                .padding(.top, getTopPadding() + 16)
-//                .padding(.bottom, getBottomPadding() + 16)
             }
             .alert(isPresented: $showToastAlert, content: {
                 Alert(
@@ -319,13 +331,14 @@ struct LSP3CreateProfileView: View {
                 }, onError: nil, onCompleted: nil, onDisposed: nil)
                 .disposed(by: disposeBag)
             
-            viewModel.lsp3Profile
+            viewModel.identifiableLsp3Profile
                 .observe(on: MainScheduler.instance)
                 .subscribe(onNext: { createdProfileEvent in
                     if let _ = createdProfileEvent?.getIfNotConsumed() {
-                        self.alertTitle = "Success!"
-                        self.alertMessage = "Profile created successfully. You now should be able to see it in a \"Cached\" tab."
-                        self.showToastAlert = true
+//                        self.alertTitle = "Success!"
+//                        self.alertMessage = "Profile created successfully. You now should be able to see it in a \"Cached\" tab."
+//                        self.showToastAlert = true
+                        navigationLinkSelection = LSP3CreateProfileView.CREATE_PROFILE_STATUS_VIEW_TAG
                     }
                 }, onError: nil, onCompleted: nil, onDisposed: nil)
                 .disposed(by: disposeBag)

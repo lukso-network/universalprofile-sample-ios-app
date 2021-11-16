@@ -16,7 +16,7 @@ struct LSP3ProfileSearchView: View {
     
     private let viewModel = DependencyInjectorContainer.resolve(LSP3ProfileSearchViewModel.self)!
     
-    @State private var profile: LSP3Profile? = nil
+    @State private var profile: IdentifiableLSP3Profile? = nil
     @State private var erc725OrHash = "QmbKW24R7iHbBQDAeU5ekL7qtRX2hxmgDCijTVnLafEb88"
     @State private var isSearchButtonEnabled = true
     @State private var showAlert = false

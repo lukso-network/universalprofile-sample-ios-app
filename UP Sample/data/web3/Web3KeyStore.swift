@@ -13,6 +13,8 @@ import CryptoSwift
 class Web3KeyStore {
     
     private static let KeyPairFileLocation = "KeyPairFileLocatio1n"
+    
+    #warning("There must be no static/default passwords used to generate EC key pair. `DefaultPassword` is only for demo purposes.")
     internal static let DefaultPassword = "1234nedfs9efn23r!23123"
     
     private let keyValueStore: KeyValueStore
@@ -38,7 +40,7 @@ class Web3KeyStore {
     }
     
     private func getKeyPairFileLocation() -> Result<String, AppError> {
-        return .success(keyValueStore.get(key: Web3KeyStore.KeyPairFileLocation) ?? "")
+        return .success(try! keyValueStore.get(key: Web3KeyStore.KeyPairFileLocation) ?? "")
     }
     
     private func loadKeyPairWithDefaultPassword() -> Result<EthereumKeystoreV3, AppError> {
@@ -48,7 +50,6 @@ class Web3KeyStore {
         } catch {
             return .failure(AppError.simpleException(error: error))
         }
-        return .failure(AppError.simpleError(msg: "Cound't load key pair with default password"))
     }
     
     private func generateKeyPairWithDefaultPassword() -> Result<EthereumKeystoreV3, AppError> {
@@ -64,7 +65,7 @@ class Web3KeyStore {
             let path = getValidPath()
             let filename = filenameForWallet(keystore)
             
-            let _ = keyValueStore.save(key: Web3KeyStore.KeyPairFileLocation, value: filename)
+            let _ = try! keyValueStore.save(key: Web3KeyStore.KeyPairFileLocation, value: filename)
             
             let filePath = path.appendingPathComponent(filename)
             try! keyData.write(to: filePath, options: .completeFileProtection)

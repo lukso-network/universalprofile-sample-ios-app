@@ -23,7 +23,7 @@ class PasswordStore {
             return .failure(.simpleError(msg: "Failed to hash a password using BCrypt"))
         }
 
-        if keyValueStore.save(key: PasswordStore.PasswordKey, value: hashedPassword) {
+        if try! keyValueStore.save(key: PasswordStore.PasswordKey, value: hashedPassword) {
             self.password = password
             return .success(password)
         } else {
@@ -37,7 +37,7 @@ class PasswordStore {
     }
     
     func hasPassword() -> Result<Bool, AppError> {
-        guard let passwordHashed = keyValueStore.get(key: PasswordStore.PasswordKey) else { return .failure(.itemNotFound) }
+        guard let passwordHashed = keyValueStore.getRaw(key: PasswordStore.PasswordKey) else { return .failure(.itemNotFound) }
         return .success(!passwordHashed.isEmpty)
     }
 
@@ -55,7 +55,7 @@ class PasswordStore {
     }
 
     private func getHashedPassword() -> Result<String, AppError> {
-        guard let passwordHashed = keyValueStore.get(key: PasswordStore.PasswordKey),
+        guard let passwordHashed = keyValueStore.getRaw(key: PasswordStore.PasswordKey),
               !passwordHashed.isEmpty
               else { return .failure(.itemNotFound) }
         return .success(passwordHashed)

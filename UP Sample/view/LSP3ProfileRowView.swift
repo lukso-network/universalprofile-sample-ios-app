@@ -10,7 +10,7 @@ import SwiftUI
 import universalprofile_ios_sdk
 
 struct LSP3ProfileRowView: View {
-    var profile: LSP3Profile
+    var profile: IdentifiableLSP3Profile
     
     var body: some View {
         LSP3ProfileView(profile: profile)

@@ -34,22 +34,27 @@ struct ERC725IdentityView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         VStack(alignment: .leading, spacing: 0) {
                             Group {
+                                
                                 Text("ERC725Key")
                                     .font(.title3)
                                     .padding(.top, 16)
                                 // TODO: Why address is here?
                                 Text(address)
-                                    .font(.body)
+                                    .frame(maxWidth: .infinity)
                                     .padding()
+                                    .font(.body)
                                     .foregroundColor(Color.black.opacity(0.75))
+                                    .fixedSize(horizontal: false, vertical: true)
                                 
                                 Text("ERC725Address")
                                     .font(.title3)
                                 // TODO: Why public key is here?
                                 Text(publicKey)
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
                                     .font(.body)
                                     .foregroundColor(Color.black.opacity(0.75))
-                                    .padding()
+                                    .fixedSize(horizontal: false, vertical: true)
                             }
                             .padding(.leading, 16)
                             .padding(.trailing, 16)
@@ -58,31 +63,36 @@ struct ERC725IdentityView: View {
                             
                             Group {
                                 Text("Result")
-                                    .font(.headline.italic())
+                                    .frame(maxWidth: .infinity)
                                     .foregroundColor(Color.black.opacity(0.8))
                                     .padding(.top, 12)
                                     .padding(.bottom, 16)
-                                    .frame(maxWidth: .infinity)
+                                    .font(.headline.italic())
                                 
                                 Text("ERC725Key")
                                     .font(.title3)
                                 Text(myInfo?.erc725Key ?? "...")
-                                    .font(.body)
                                     .foregroundColor(Color.black.opacity(0.75))
                                     .padding()
+                                    .font(.body)
+                                    .frame(maxHeight: .infinity)
+                                    .fixedSize(horizontal: false, vertical: true)
                                 
                                 Text("ERC725Address")
                                     .font(.title3)
                                 Text(myInfo?.erc725Address ?? "...")
-                                    .font(.body)
+                                    .frame(maxHeight: .infinity)
                                     .foregroundColor(Color.black.opacity(0.75))
                                     .padding()
+                                    .font(.body)
+                                    .fixedSize(horizontal: false, vertical: true)
                                 
                                 Text("IsAnonymous")
                                 Text(isAnonymous())
-                                    .font(.body)
+                                    .frame(maxHeight: .infinity)
                                     .foregroundColor(Color.black.opacity(0.75))
                                     .padding()
+                                    .font(.body)
                             }
                             .padding(.leading, 16)
                             .padding(.trailing, 16)

@@ -10,23 +10,34 @@ import UIKit
 import SwiftUI
 import RxRelay
 import RxSwift
+import web3swift
 import Foundation
 import OrderedCollections
 import universalprofile_ios_sdk
 
 class LSP3CreateProfileViewModel : ObservableObject {
     
+    let progressMessage = BehaviorRelay<String>(value: "")
     let progress = BehaviorRelay<Bool>(value: false)
     let errorEvent = PublishRelay<AppError>()
-    let lsp3Profile = BehaviorRelay<ConsumableEvent<LSP3Profile>?>(value: nil)
+    let identifiableLsp3Profile = BehaviorRelay<ConsumableEvent<IdentifiableLSP3Profile>?>(value: nil)
+    let universalProfile = BehaviorRelay<ConsumableEvent<DeployLSP3ProfileResponse>?>(value: nil)
+    let taskStatus = BehaviorRelay<ConsumableEvent<LSP3ProfileDeployTaskResponse>?>(value: nil)
     
     @Published private(set) var tags = OrderedSet<LSP3ProfileTag>()
     @Published private(set) var links = OrderedSet<LSP3ProfileLink>()
     private(set) var createLsp3RequestBuilder = LSP3CreateProfileRequest.Builder()
-    private let lsp3ProfileRepository: LSP3ProfileRepository
     
-    init(_ lsp3ProfileRepository: LSP3ProfileRepository) {
+    private let lsp3ProfileRepository: LSP3ProfileRepository
+    private let universalProfileRepository: UniversalProfileRepository
+    private let web3KeyStore: Web3KeyStore
+    
+    init(_ lsp3ProfileRepository: LSP3ProfileRepository,
+         _ universalProfileRepository: UniversalProfileRepository,
+         _ web3KeyStore: Web3KeyStore) {
         self.lsp3ProfileRepository = lsp3ProfileRepository
+        self.universalProfileRepository = universalProfileRepository
+        self.web3KeyStore = web3KeyStore
     }
     
     func appendNewLink(_ title: String, _ url: String) {
@@ -91,28 +102,47 @@ class LSP3CreateProfileViewModel : ObservableObject {
             switch result {
                 case .success(let profile):
                     self.progress.accept(false)
-                    self.lsp3Profile.accept(.init(profile))
+                    self.progressMessage.accept("Profile created.\nDeploying smart contracts...")
+                    self.identifiableLsp3Profile.accept(.init(profile))
+                    self.deploySmartContracts(profile)
                 case .failure(let error):
                     self.onError(error)
             }
         }
     }
+    
+    private func deploySmartContracts(_ profile: IdentifiableLSP3Profile) {
+        guard !profile.id.isEmpty else {
+            onError(.simpleError(msg: "Cannot deploy LSP3 profile with empty CID"))
+            return
+        }
+        
+        let ethereumKeystore: EthereumKeystoreV3 = try! web3KeyStore.loadOrGenerateDefaultKeyPair().get()
+        
+        let request = DeployLSP3ProfileRequest(profileJsonUrl: "ipfs://\(profile.id)",
+                                               // You may want to look for safer options of
+                                               // generating salt 32 bytes length if that makes sense.
+                                               salt: randomNotSecureSalt(),
+                                               erc725ControllerKey: ethereumKeystore.getAddress()!.address,
+                                               // TODO: pass in email from user instead of placeholder
+                                               email: "hello@lukso.io")
+        
+//        universalProfileRepository.uploadProfile(body: request) { deployTaskStatusResponse in
+//            let msg = self.progressMessage.value.replacingOccurrences(of: "...", with: "")
+//            self.progressMessage.accept("\(msg).")
+//            self.taskStatus.accept(ConsumableEvent(deployTaskStatusResponse))
+//        } responseHandler: { result in
+//            switch result {
+//                case .success((let deployUpResponse, let taskStatus)):
+//                    // TODO: save deployUpResponse (aka profile info)
+//                    self.taskStatus.accept(ConsumableEvent(taskStatus))
+//                    self.universalProfile.accept(ConsumableEvent(deployUpResponse))
+//                case .failure(let error):
+//                    self.onError(.simpleException(error: error))
+//            }
+//        }
+
+    }
 }
 
-class LSP3ProfileTag: Identifiable, Hashable {
-    
-    static func == (lhs: LSP3ProfileTag, rhs: LSP3ProfileTag) -> Bool {
-        return lhs.tag == rhs.tag
-    }
-    
-    let id = UUID()
-    let tag: String
-    
-    init(tag: String) {
-        self.tag = tag
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(tag.hashValue &* 13)
-    }
-}
+

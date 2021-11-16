@@ -194,6 +194,21 @@
 		D6CB848B26E52B1D00D1E991 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B005226D2D4FC008C9403 /* Starscream.framework */; };
 		D6CB848C26E52B1D00D1E991 /* web3swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004C26D2D4FC008C9403 /* web3swift.framework */; };
 		D6CB848D26E52E7A00D1E991 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68B004E26D2D4FC008C9403 /* Alamofire.framework */; };
+		D6A95A3026FE81CF00981245 /* LSP3CreateProfileStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A2F26FE81CF00981245 /* LSP3CreateProfileStatusView.swift */; };
+		D6A95A3126FE81CF00981245 /* LSP3CreateProfileStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A2F26FE81CF00981245 /* LSP3CreateProfileStatusView.swift */; };
+		D6A95A3226FE81CF00981245 /* LSP3CreateProfileStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A2F26FE81CF00981245 /* LSP3CreateProfileStatusView.swift */; };
+		D6A95A3426FE842100981245 /* Misc+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A3326FE842100981245 /* Misc+Temp.swift */; };
+		D6A95A3526FE842100981245 /* Misc+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A3326FE842100981245 /* Misc+Temp.swift */; };
+		D6A95A3626FE842100981245 /* Misc+Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A3326FE842100981245 /* Misc+Temp.swift */; };
+		D6A95A3826FF1FC200981245 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A3726FF1FC200981245 /* View+Extension.swift */; };
+		D6A95A3926FF1FC200981245 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A3726FF1FC200981245 /* View+Extension.swift */; };
+		D6A95A3A26FF1FC300981245 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A3726FF1FC200981245 /* View+Extension.swift */; };
+		D6A95A3C27007EF100981245 /* UniversalProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A3B27007EF100981245 /* UniversalProfileRepository.swift */; };
+		D6A95A3D27007EF100981245 /* UniversalProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A3B27007EF100981245 /* UniversalProfileRepository.swift */; };
+		D6A95A3E27007EF100981245 /* UniversalProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A95A3B27007EF100981245 /* UniversalProfileRepository.swift */; };
+		D6AA60C327439AB300EE6201 /* LSP3ProfileTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA60C227439AB300EE6201 /* LSP3ProfileTag.swift */; };
+		D6AA60C427439AB300EE6201 /* LSP3ProfileTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA60C227439AB300EE6201 /* LSP3ProfileTag.swift */; };
+		D6AA60C527439AB300EE6201 /* LSP3ProfileTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA60C227439AB300EE6201 /* LSP3ProfileTag.swift */; };
 		D6DCA54226CE50140035CC12 /* UP_SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DCA54126CE50140035CC12 /* UP_SampleApp.swift */; };
 		D6DCA54426CE50140035CC12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DCA54326CE50140035CC12 /* ContentView.swift */; };
 		D6DCA54626CE50150035CC12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6DCA54526CE50150035CC12 /* Assets.xcassets */; };
@@ -379,6 +394,11 @@
 		D6A8F19F26EF3D1500C4BF9F /* LSP3ProfileDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSP3ProfileDetailsView.swift; sourceTree = "<group>"; };
 		D6A8F1A326EF3D2300C4BF9F /* LSP3CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSP3CreateProfileView.swift; sourceTree = "<group>"; };
 		D6A8F1AA26EF4A2D00C4BF9F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		D6A95A2F26FE81CF00981245 /* LSP3CreateProfileStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSP3CreateProfileStatusView.swift; sourceTree = "<group>"; };
+		D6A95A3326FE842100981245 /* Misc+Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Misc+Temp.swift"; sourceTree = "<group>"; };
+		D6A95A3726FF1FC200981245 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		D6A95A3B27007EF100981245 /* UniversalProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalProfileRepository.swift; sourceTree = "<group>"; };
+		D6AA60C227439AB300EE6201 /* LSP3ProfileTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSP3ProfileTag.swift; sourceTree = "<group>"; };
 		D6DCA53E26CE50140035CC12 /* UP Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UP Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6DCA54126CE50140035CC12 /* UP_SampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UP_SampleApp.swift; sourceTree = "<group>"; };
 		D6DCA54326CE50140035CC12 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -490,6 +510,7 @@
 				D6A8F15C26EB54D000C4BF9F /* LSP3ProfilesListView.swift */,
 				D601906F26F4E14B00F8BC0B /* LSP3ProfileRowView.swift */,
 				D6A8F1A326EF3D2300C4BF9F /* LSP3CreateProfileView.swift */,
+				D6A95A2F26FE81CF00981245 /* LSP3CreateProfileStatusView.swift */,
 				D6A8F19F26EF3D1500C4BF9F /* LSP3ProfileDetailsView.swift */,
 				D601906B26F4E08300F8BC0B /* CustomAsyncImage.swift */,
 				D601907326F4E1A700F8BC0B /* DefaultViewsFactory.swift */,
@@ -608,6 +629,7 @@
 		D6629EBC26E9596C00686119 /* repositories */ = {
 			isa = PBXGroup;
 			children = (
+				D6A95A3B27007EF100981245 /* UniversalProfileRepository.swift */,
 				D6629EBD26E9598D00686119 /* LSP3ProfileRepository.swift */,
 				D6629EC126E959D900686119 /* SimpleCache.swift */,
 			);
@@ -628,6 +650,8 @@
 				D601905026F4812600F8BC0B /* NeomorphicStyles.swift */,
 				D601906526F4E06300F8BC0B /* String+Extension.swift */,
 				D601A17726FB457800F8BC0B /* ConsumableEvent.swift */,
+				D6A95A3326FE842100981245 /* Misc+Temp.swift */,
+				D6A95A3726FF1FC200981245 /* View+Extension.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -665,6 +689,7 @@
 		D68B006726D2DCD6008C9403 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				D6AA60C127439AA200EE6201 /* runtime */,
 				D6629EBC26E9596C00686119 /* repositories */,
 				D68B015426D627CF008C9403 /* usecase */,
 				D68B00C526D4F414008C9403 /* api */,
@@ -730,6 +755,14 @@
 				D601909226F87CE000F8BC0B /* LSP3ProfileSearchViewModel.swift */,
 			);
 			path = viewmodel;
+			sourceTree = "<group>";
+		};
+		D6AA60C127439AA200EE6201 /* runtime */ = {
+			isa = PBXGroup;
+			children = (
+				D6AA60C227439AB300EE6201 /* LSP3ProfileTag.swift */,
+			);
+			path = runtime;
 			sourceTree = "<group>";
 		};
 		D6DCA53526CE50140035CC12 = {
@@ -1034,6 +1067,7 @@
 				D611D2D826DA334D00C31E3D /* SampleResourceService.swift in Sources */,
 				D601906C26F4E08300F8BC0B /* CustomAsyncImage.swift in Sources */,
 				D68B00CB26D4F505008C9403 /* SampleResourceServiceImpl.swift in Sources */,
+				D6A95A3C27007EF100981245 /* UniversalProfileRepository.swift in Sources */,
 				D601909326F87CE000F8BC0B /* LSP3ProfileSearchViewModel.swift in Sources */,
 				D664A8A826F0A63D00CB7A1F /* ImageLoader.swift in Sources */,
 				D68B016726D63714008C9403 /* Date+Extension.swift in Sources */,
@@ -1049,12 +1083,14 @@
 				D6A8F19826EF371100C4BF9F /* LSP3CreateProfileViewModel.swift in Sources */,
 				D601907426F4E1A700F8BC0B /* DefaultViewsFactory.swift in Sources */,
 				D68B017026D63C35008C9403 /* IdentityProviderBaseFlowViewModel.swift in Sources */,
+				D6A95A3826FF1FC200981245 /* View+Extension.swift in Sources */,
 				D68B016326D6365B008C9403 /* UIDevice+Extension.swift in Sources */,
 				D6A8F15F26EB583D00C4BF9F /* LSP3ProfileListViewModel.swift in Sources */,
 				D601906126F4CC3B00F8BC0B /* LSP3ProfileSearchView.swift in Sources */,
 				D6A8F1AB26EF4A2D00C4BF9F /* ImagePicker.swift in Sources */,
 				D601905126F4812600F8BC0B /* NeomorphicStyles.swift in Sources */,
 				D68B015126D621E2008C9403 /* BCryptSwiftRandom.swift in Sources */,
+				D6AA60C327439AB300EE6201 /* LSP3ProfileTag.swift in Sources */,
 				D6782A6026CF97F2007737C5 /* AppError.swift in Sources */,
 				D6A8F19C26EF3C0E00C4BF9F /* LSP3ProfileDetailsViewModel.swift in Sources */,
 				D601907026F4E14B00F8BC0B /* LSP3ProfileRowView.swift in Sources */,
@@ -1062,6 +1098,7 @@
 				D6DCA54226CE50140035CC12 /* UP_SampleApp.swift in Sources */,
 				D601906626F4E06300F8BC0B /* String+Extension.swift in Sources */,
 				D68B00B126D4CF30008C9403 /* PasswordStore.swift in Sources */,
+				D6A95A3426FE842100981245 /* Misc+Temp.swift in Sources */,
 				D68B007026D2E3C2008C9403 /* Environments.swift in Sources */,
 				D6629EBE26E9598D00686119 /* LSP3ProfileRepository.swift in Sources */,
 				D601907826F4E1C600F8BC0B /* Views+Utility.swift in Sources */,
@@ -1069,6 +1106,7 @@
 				D601905C26F4CB5600F8BC0B /* ERC725IdentityView.swift in Sources */,
 				D6629EC226E959D900686119 /* SimpleCache.swift in Sources */,
 				D601A17826FB457900F8BC0B /* ConsumableEvent.swift in Sources */,
+				D6A95A3026FE81CF00981245 /* LSP3CreateProfileStatusView.swift in Sources */,
 				D68B006A26D2DCEC008C9403 /* Web3KeyStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1084,6 +1122,7 @@
 				D68B00CC26D4F505008C9403 /* SampleResourceServiceImpl.swift in Sources */,
 				D601906D26F4E08300F8BC0B /* CustomAsyncImage.swift in Sources */,
 				D68B008626D39A56008C9403 /* Environments.swift in Sources */,
+				D6A95A3D27007EF100981245 /* UniversalProfileRepository.swift in Sources */,
 				D601909426F87CE000F8BC0B /* LSP3ProfileSearchViewModel.swift in Sources */,
 				D664A8A926F0A63D00CB7A1F /* ImageLoader.swift in Sources */,
 				D6629EC326E959D900686119 /* SimpleCache.swift in Sources */,
@@ -1099,12 +1138,14 @@
 				D68B014E26D621C0008C9403 /* BCryptSwift.swift in Sources */,
 				D601907526F4E1A700F8BC0B /* DefaultViewsFactory.swift in Sources */,
 				D6DCA55426CE50150035CC12 /* UP_SampleTests.swift in Sources */,
+				D6A95A3926FF1FC200981245 /* View+Extension.swift in Sources */,
 				D6A8F16026EB583D00C4BF9F /* LSP3ProfileListViewModel.swift in Sources */,
 				D601906226F4CC3B00F8BC0B /* LSP3ProfileSearchView.swift in Sources */,
 				D6A8F1AC26EF4A2D00C4BF9F /* ImagePicker.swift in Sources */,
 				D601905226F4812600F8BC0B /* NeomorphicStyles.swift in Sources */,
 				D68B008C26D39A56008C9403 /* ContentView.swift in Sources */,
 				D68B015226D621E2008C9403 /* BCryptSwiftRandom.swift in Sources */,
+				D6AA60C427439AB300EE6201 /* LSP3ProfileTag.swift in Sources */,
 				D6A8F19D26EF3C0E00C4BF9F /* LSP3ProfileDetailsViewModel.swift in Sources */,
 				D68B008926D39A56008C9403 /* DependencyInjectorContainer.swift in Sources */,
 				D601907126F4E14B00F8BC0B /* LSP3ProfileRowView.swift in Sources */,
@@ -1112,6 +1153,7 @@
 				D68B016426D6365B008C9403 /* UIDevice+Extension.swift in Sources */,
 				D601906726F4E06300F8BC0B /* String+Extension.swift in Sources */,
 				D68B016026D634CA008C9403 /* UserAgent.swift in Sources */,
+				D6A95A3526FE842100981245 /* Misc+Temp.swift in Sources */,
 				D68B016826D63714008C9403 /* Date+Extension.swift in Sources */,
 				D664A8A526F0A30C00CB7A1F /* LinearGradient+Extension.swift in Sources */,
 				D601907926F4E1C600F8BC0B /* Views+Utility.swift in Sources */,
@@ -1119,6 +1161,7 @@
 				D611D2D926DA334D00C31E3D /* SampleResourceService.swift in Sources */,
 				D68B008826D39A56008C9403 /* KeyValueStore.swift in Sources */,
 				D601A17926FB457900F8BC0B /* ConsumableEvent.swift in Sources */,
+				D6A95A3126FE81CF00981245 /* LSP3CreateProfileStatusView.swift in Sources */,
 				D68B015726D627DA008C9403 /* SignInUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1134,6 +1177,7 @@
 				D68B00CD26D4F505008C9403 /* SampleResourceServiceImpl.swift in Sources */,
 				D601906E26F4E08300F8BC0B /* CustomAsyncImage.swift in Sources */,
 				D68B009526D39A58008C9403 /* Environments.swift in Sources */,
+				D6A95A3E27007EF100981245 /* UniversalProfileRepository.swift in Sources */,
 				D601909526F87CE000F8BC0B /* LSP3ProfileSearchViewModel.swift in Sources */,
 				D664A8AA26F0A63D00CB7A1F /* ImageLoader.swift in Sources */,
 				D6629EC426E959D900686119 /* SimpleCache.swift in Sources */,
@@ -1149,12 +1193,14 @@
 				D68B014F26D621C0008C9403 /* BCryptSwift.swift in Sources */,
 				D601907626F4E1A700F8BC0B /* DefaultViewsFactory.swift in Sources */,
 				D6DCA55F26CE50150035CC12 /* UP_SampleUITests.swift in Sources */,
+				D6A95A3A26FF1FC300981245 /* View+Extension.swift in Sources */,
 				D6A8F16126EB583D00C4BF9F /* LSP3ProfileListViewModel.swift in Sources */,
 				D601906326F4CC3B00F8BC0B /* LSP3ProfileSearchView.swift in Sources */,
 				D6A8F1AD26EF4A2D00C4BF9F /* ImagePicker.swift in Sources */,
 				D601905326F4812600F8BC0B /* NeomorphicStyles.swift in Sources */,
 				D68B009B26D39A58008C9403 /* ContentView.swift in Sources */,
 				D68B015326D621E2008C9403 /* BCryptSwiftRandom.swift in Sources */,
+				D6AA60C527439AB300EE6201 /* LSP3ProfileTag.swift in Sources */,
 				D6A8F19E26EF3C0E00C4BF9F /* LSP3ProfileDetailsViewModel.swift in Sources */,
 				D68B009826D39A58008C9403 /* DependencyInjectorContainer.swift in Sources */,
 				D601907226F4E14B00F8BC0B /* LSP3ProfileRowView.swift in Sources */,
@@ -1162,6 +1208,7 @@
 				D68B016526D6365B008C9403 /* UIDevice+Extension.swift in Sources */,
 				D601906826F4E06300F8BC0B /* String+Extension.swift in Sources */,
 				D68B016126D634CA008C9403 /* UserAgent.swift in Sources */,
+				D6A95A3626FE842100981245 /* Misc+Temp.swift in Sources */,
 				D68B016926D63714008C9403 /* Date+Extension.swift in Sources */,
 				D664A8A626F0A30C00CB7A1F /* LinearGradient+Extension.swift in Sources */,
 				D601907A26F4E1C600F8BC0B /* Views+Utility.swift in Sources */,
@@ -1169,6 +1216,7 @@
 				D611D2DA26DA334D00C31E3D /* SampleResourceService.swift in Sources */,
 				D68B009726D39A58008C9403 /* KeyValueStore.swift in Sources */,
 				D601A17A26FB457900F8BC0B /* ConsumableEvent.swift in Sources */,
+				D6A95A3226FE81CF00981245 /* LSP3CreateProfileStatusView.swift in Sources */,
 				D68B015826D627DA008C9403 /* SignInUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1240,7 +1288,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1295,7 +1343,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

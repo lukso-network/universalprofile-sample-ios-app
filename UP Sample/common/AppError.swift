@@ -18,6 +18,7 @@ enum AppError: Error {
     case jsonMalFormed(error: Error)
     case simpleError(msg: String)
     case simpleException(error: Error)
+    case simpleExceptionWithMessage(msg: String, error: Error)
     case storageException(error: Error)
     case alreadyExists
     case notImplementedError
@@ -42,6 +43,8 @@ enum AppError: Error {
                 return msg
             case .simpleException(let error):
                 return error.localizedDescription
+            case .simpleExceptionWithMessage(let msg, let error):
+                return msg
             case .storageException(let error):
                 return error.localizedDescription
             case .alreadyExists:

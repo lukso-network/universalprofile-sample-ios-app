@@ -16,7 +16,7 @@ class LSP3ProfileDetailsViewModel : ObservableObject {
     
     @Published private(set) var progress = false
     @Published private(set) var errorEvent: ConsumableEvent<Error> = .empty()
-    let lsp3Profile = BehaviorRelay<LSP3Profile?>(value: nil)
+    let lsp3Profile = BehaviorRelay<IdentifiableLSP3Profile?>(value: nil)
     @Published private(set) var rawProfileJson: String? = nil
     
     private var lsp3ProfileHash = ""

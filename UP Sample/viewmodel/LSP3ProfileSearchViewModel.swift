@@ -15,7 +15,7 @@ class LSP3ProfileSearchViewModel {
     
     let progress = BehaviorRelay<Bool>(value: false)
     let errorEvent = PublishRelay<AppError>()
-    let lsp3Profile = BehaviorRelay<LSP3Profile?>(value: nil)
+    let lsp3Profile = BehaviorRelay<IdentifiableLSP3Profile?>(value: nil)
     
     private let lsp3ProfileRepository: LSP3ProfileRepository
     
@@ -27,7 +27,8 @@ class LSP3ProfileSearchViewModel {
         if UPWeb3Utils.isAddress(input) {
             // Search on a blockchain
             // FIXME: search on blockchain
-            lsp3Profile.accept(LSP3Profile(id: "1", name: "An attempt to search on blockchain", description: "You entered a valid address", links: [], tags: [], profileImage: [], backgroundImage: []))
+            lsp3Profile.accept(IdentifiableLSP3Profile(id: "1",
+                                                       lsp3Profile: LSP3Profile(name: "An attempt to search on blockchain", description: "You entered a valid address", links: [], tags: [], profileImage: [], backgroundImage: [])))
         } else if UPWeb3Utils.isIpfsCid(input) {
             // Search on IPFS
             searchOnIPFS(input)

@@ -16,7 +16,7 @@ class LSP3ProfileListViewModel {
     
     let progress = BehaviorRelay<Bool>(value: false)
     let errorEvent = PublishRelay<AppError>()
-    let lsp3Profiles = BehaviorRelay<[LSP3Profile]>(value: [])
+    let lsp3Profiles = BehaviorRelay<[IdentifiableLSP3Profile]>(value: [])
     
     init(_ lsp3ProfileRepository: LSP3ProfileRepository) {
         self.lsp3ProfileRepository = lsp3ProfileRepository

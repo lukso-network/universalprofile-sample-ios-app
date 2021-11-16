@@ -16,7 +16,7 @@ struct LSP3ProfilesListView: View {
     
     @State private var fileHash = "QmaufE68Q6cdnFJk6VQvvkXgqP3x8Hfp8bhqrjijeRHrnh"
     @State private var isSearchButtonEnabled = true
-    @State private var profiles: [LSP3Profile] = []
+    @State private var profiles: [IdentifiableLSP3Profile] = []
     
     @State private var showAlert = false
     @State private var alertMessage: String? = nil

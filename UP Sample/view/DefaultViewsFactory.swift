@@ -66,7 +66,7 @@ func defaultLinkView(title: String?, url: String?) -> some View {
 func createTagsGrid(_ tags: [String]) -> some View {
     return LazyVGrid(columns: [.init(.flexible()), .init(.flexible()), .init(.flexible()), .init(.flexible())],
                      alignment: .leading,
-                     spacing: 4) {
+                     spacing: 36) {
         ForEach(tags) { tag in
             defaultTagText(tag)
                 .lineLimit(1)
