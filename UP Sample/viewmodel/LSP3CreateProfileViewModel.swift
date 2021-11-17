@@ -26,7 +26,7 @@ class LSP3CreateProfileViewModel : ObservableObject {
     @Published var showToastAlert = false
     @Published var alertTitle = ""
     @Published var alertMessage = ""
-    
+    @Published var identicon: Identicon? = nil
     
     @Published private(set) var tags = OrderedSet<LSP3ProfileTag>()
     @Published private(set) var links = OrderedSet<LSP3ProfileLink>()
@@ -121,8 +121,8 @@ class LSP3CreateProfileViewModel : ObservableObject {
     }
     
     private func deploySmartContracts(_ profile: IdentifiableLSP3Profile) {
-        guard !profile.id.isEmpty else {
-            onError(.simpleError(msg: "Cannot deploy LSP3 profile with empty CID"))
+        guard let identicon = identicon, !profile.id.isEmpty else {
+            onError(.simpleError(msg: "Profile is not uploaded or identicon is not selected"))
             return
         }
         
@@ -131,26 +131,27 @@ class LSP3CreateProfileViewModel : ObservableObject {
         let request = DeployLSP3ProfileRequest(profileJsonUrl: "ipfs://\(profile.id)",
                                                // You may want to look for safer options of
                                                // generating salt 32 bytes length if that makes sense.
-                                               salt: randomNotSecureSalt(),
+                                               salt: identicon.salt,
                                                erc725ControllerKey: ethereumKeystore.getAddress()!.address,
                                                // TODO: pass in email from user instead of placeholder
                                                email: "hello@lukso.io")
         
-//        universalProfileRepository.uploadProfile(body: request) { deployTaskStatusResponse in
-//            let msg = self.progressMessage.value.replacingOccurrences(of: "...", with: "")
-//            self.progressMessage.accept("\(msg).")
-//            self.taskStatus.accept(ConsumableEvent(deployTaskStatusResponse))
-//        } responseHandler: { result in
-//            switch result {
-//                case .success((let deployUpResponse, let taskStatus)):
-//                    // TODO: save deployUpResponse (aka profile info)
-//                    self.taskStatus.accept(ConsumableEvent(taskStatus))
-//                    self.universalProfile.accept(ConsumableEvent(deployUpResponse))
-//                case .failure(let error):
-//                    self.onError(.simpleException(error: error))
-//            }
-//        }
-
+        
+        
+        universalProfileRepository.uploadProfile(body: request) { deployTaskStatusResponse in
+            let msg = self.progressMessage.replacingOccurrences(of: "...", with: "")
+            self.progressMessage = "\(msg)."
+            self.taskStatus = deployTaskStatusResponse
+        } responseHandler: { result in
+            switch result {
+                case .success((let deployUpResponse, let taskStatus)):
+                    // TODO: save deployUpResponse (aka profile info)
+                    self.taskStatus = taskStatus
+                    self.universalProfile = deployUpResponse
+                case .failure(let error):
+                    self.onError(.simpleException(error: error))
+            }
+        }
     }
 }
 

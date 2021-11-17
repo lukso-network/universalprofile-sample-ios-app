@@ -77,6 +77,14 @@ class DependencyInjectorContainer {
         container.register(LSP3ProfileSearchViewModel.self) { r in
             LSP3ProfileSearchViewModel(r.resolve(LSP3ProfileRepository.self)!)
         }
+        
+        let create2ConfigurationRepository = Create2ConfigurationRepository(container.resolve(LuksoRelayService.self)!)
+        container.register(Create2ConfigurationRepository.self) { r in
+            create2ConfigurationRepository
+        }
+        container.register(IdenticonSelectorViewModel.self) { r in
+            IdenticonSelectorViewModel(r.resolve(Create2ConfigurationRepository.self)!)
+        }
     }
     
     
