@@ -211,6 +211,15 @@
 		D6AA611627440D5F00EE6201 /* universalprofile_ios_sdk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA611227440D4F00EE6201 /* universalprofile_ios_sdk.xcframework */; };
 		D6AA611727440DD000EE6201 /* universalprofile_ios_sdk.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA611227440D4F00EE6201 /* universalprofile_ios_sdk.xcframework */; };
 		D6AA611827440DD000EE6201 /* universalprofile_ios_sdk.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6AA611227440D4F00EE6201 /* universalprofile_ios_sdk.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D6AA611A27442CDD00EE6201 /* IdenticonSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA611927442CDD00EE6201 /* IdenticonSelectorViewModel.swift */; };
+		D6AA611B27442CDD00EE6201 /* IdenticonSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA611927442CDD00EE6201 /* IdenticonSelectorViewModel.swift */; };
+		D6AA611C27442CDD00EE6201 /* IdenticonSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA611927442CDD00EE6201 /* IdenticonSelectorViewModel.swift */; };
+		D6AA612C274439CC00EE6201 /* Create2ConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA612B274439CC00EE6201 /* Create2ConfigurationRepository.swift */; };
+		D6AA612D274439CC00EE6201 /* Create2ConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA612B274439CC00EE6201 /* Create2ConfigurationRepository.swift */; };
+		D6AA612E274439CC00EE6201 /* Create2ConfigurationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA612B274439CC00EE6201 /* Create2ConfigurationRepository.swift */; };
+		D6AA61362744EDD100EE6201 /* IdenticonsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA61352744EDD100EE6201 /* IdenticonsGridView.swift */; };
+		D6AA61372744EDD100EE6201 /* IdenticonsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA61352744EDD100EE6201 /* IdenticonsGridView.swift */; };
+		D6AA61382744EDD100EE6201 /* IdenticonsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA61352744EDD100EE6201 /* IdenticonsGridView.swift */; };
 		D6DCA54226CE50140035CC12 /* UP_SampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DCA54126CE50140035CC12 /* UP_SampleApp.swift */; };
 		D6DCA54426CE50140035CC12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6DCA54326CE50140035CC12 /* ContentView.swift */; };
 		D6DCA54626CE50150035CC12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6DCA54526CE50150035CC12 /* Assets.xcassets */; };
@@ -220,14 +229,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D6DCA55026CE50150035CC12 /* PBXContainerItemProxy */ = {
+		D6AA61392744F25300EE6201 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D6DCA53626CE50140035CC12 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D6DCA53D26CE50140035CC12;
 			remoteInfo = "UP Sample";
 		};
-		D6DCA55B26CE50150035CC12 /* PBXContainerItemProxy */ = {
+		D6AA613B2744F25F00EE6201 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D6DCA53626CE50140035CC12 /* Project object */;
 			proxyType = 1;
@@ -443,6 +452,9 @@
 		D6AA60D32743F6AB00EE6201 /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxBlocking.xcframework; path = Carthage/Build/RxBlocking.xcframework; sourceTree = "<group>"; };
 		D6AA60D42743F6AB00EE6201 /* SipHash.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SipHash.xcframework; path = Carthage/Build/SipHash.xcframework; sourceTree = "<group>"; };
 		D6AA611227440D4F00EE6201 /* universalprofile_ios_sdk.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = universalprofile_ios_sdk.xcframework; path = Carthage/Build/universalprofile_ios_sdk.xcframework; sourceTree = "<group>"; };
+		D6AA611927442CDD00EE6201 /* IdenticonSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdenticonSelectorViewModel.swift; sourceTree = "<group>"; };
+		D6AA612B274439CC00EE6201 /* Create2ConfigurationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create2ConfigurationRepository.swift; sourceTree = "<group>"; };
+		D6AA61352744EDD100EE6201 /* IdenticonsGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdenticonsGridView.swift; sourceTree = "<group>"; };
 		D6DCA53E26CE50140035CC12 /* UP Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UP Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6DCA54126CE50140035CC12 /* UP_SampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UP_SampleApp.swift; sourceTree = "<group>"; };
 		D6DCA54326CE50140035CC12 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -547,6 +559,7 @@
 				D601907326F4E1A700F8BC0B /* DefaultViewsFactory.swift */,
 				D601907726F4E1C600F8BC0B /* Views+Utility.swift */,
 				D601A17F26FBA24700F8BC0B /* LSP3ProfileView.swift */,
+				D6AA61352744EDD100EE6201 /* IdenticonsGridView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -663,6 +676,7 @@
 				D6A95A3B27007EF100981245 /* UniversalProfileRepository.swift */,
 				D6629EBD26E9598D00686119 /* LSP3ProfileRepository.swift */,
 				D6629EC126E959D900686119 /* SimpleCache.swift */,
+				D6AA612B274439CC00EE6201 /* Create2ConfigurationRepository.swift */,
 			);
 			path = repositories;
 			sourceTree = "<group>";
@@ -800,6 +814,7 @@
 				D6A8F19726EF371100C4BF9F /* LSP3CreateProfileViewModel.swift */,
 				D6A8F19B26EF3C0E00C4BF9F /* LSP3ProfileDetailsViewModel.swift */,
 				D601909226F87CE000F8BC0B /* LSP3ProfileSearchViewModel.swift */,
+				D6AA611927442CDD00EE6201 /* IdenticonSelectorViewModel.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -915,12 +930,11 @@
 			buildPhases = (
 				D6DCA54B26CE50150035CC12 /* Sources */,
 				D6DCA54C26CE50150035CC12 /* Frameworks */,
-				D6DCA54D26CE50150035CC12 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D6DCA55126CE50150035CC12 /* PBXTargetDependency */,
+				D6AA613A2744F25300EE6201 /* PBXTargetDependency */,
 			);
 			name = "UP SampleTests";
 			productName = "UP SampleTests";
@@ -933,12 +947,11 @@
 			buildPhases = (
 				D6DCA55626CE50150035CC12 /* Sources */,
 				D6DCA55726CE50150035CC12 /* Frameworks */,
-				D6DCA55826CE50150035CC12 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D6DCA55C26CE50150035CC12 /* PBXTargetDependency */,
+				D6AA613C2744F25F00EE6201 /* PBXTargetDependency */,
 			);
 			name = "UP SampleUITests";
 			productName = "UP SampleUITests";
@@ -1000,20 +1013,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D6DCA54D26CE50150035CC12 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6DCA55826CE50150035CC12 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1025,7 +1024,6 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 			);
 			name = "Extracting redundant architectures during release build";
 			outputFileListPaths = (
@@ -1053,6 +1051,7 @@
 				D6A95A3C27007EF100981245 /* UniversalProfileRepository.swift in Sources */,
 				D601909326F87CE000F8BC0B /* LSP3ProfileSearchViewModel.swift in Sources */,
 				D664A8A826F0A63D00CB7A1F /* ImageLoader.swift in Sources */,
+				D6AA611A27442CDD00EE6201 /* IdenticonSelectorViewModel.swift in Sources */,
 				D68B016726D63714008C9403 /* Date+Extension.swift in Sources */,
 				D68B014D26D621C0008C9403 /* BCryptSwift.swift in Sources */,
 				D6A8F1A426EF3D2300C4BF9F /* LSP3CreateProfileView.swift in Sources */,
@@ -1067,6 +1066,7 @@
 				D601907426F4E1A700F8BC0B /* DefaultViewsFactory.swift in Sources */,
 				D68B017026D63C35008C9403 /* IdentityProviderBaseFlowViewModel.swift in Sources */,
 				D6A95A3826FF1FC200981245 /* View+Extension.swift in Sources */,
+				D6AA61362744EDD100EE6201 /* IdenticonsGridView.swift in Sources */,
 				D68B016326D6365B008C9403 /* UIDevice+Extension.swift in Sources */,
 				D6A8F15F26EB583D00C4BF9F /* LSP3ProfileListViewModel.swift in Sources */,
 				D601906126F4CC3B00F8BC0B /* LSP3ProfileSearchView.swift in Sources */,
@@ -1083,6 +1083,7 @@
 				D68B00B126D4CF30008C9403 /* PasswordStore.swift in Sources */,
 				D6A95A3426FE842100981245 /* Misc+Temp.swift in Sources */,
 				D68B007026D2E3C2008C9403 /* Environments.swift in Sources */,
+				D6AA612C274439CC00EE6201 /* Create2ConfigurationRepository.swift in Sources */,
 				D6629EBE26E9598D00686119 /* LSP3ProfileRepository.swift in Sources */,
 				D601907826F4E1C600F8BC0B /* Views+Utility.swift in Sources */,
 				D664A8A426F0A30C00CB7A1F /* LinearGradient+Extension.swift in Sources */,
@@ -1108,6 +1109,7 @@
 				D6A95A3D27007EF100981245 /* UniversalProfileRepository.swift in Sources */,
 				D601909426F87CE000F8BC0B /* LSP3ProfileSearchViewModel.swift in Sources */,
 				D664A8A926F0A63D00CB7A1F /* ImageLoader.swift in Sources */,
+				D6AA611B27442CDD00EE6201 /* IdenticonSelectorViewModel.swift in Sources */,
 				D6629EC326E959D900686119 /* SimpleCache.swift in Sources */,
 				D6A8F1A526EF3D2300C4BF9F /* LSP3CreateProfileView.swift in Sources */,
 				D68B008A26D39A56008C9403 /* Web3KeyStore.swift in Sources */,
@@ -1122,6 +1124,7 @@
 				D601907526F4E1A700F8BC0B /* DefaultViewsFactory.swift in Sources */,
 				D6DCA55426CE50150035CC12 /* UP_SampleTests.swift in Sources */,
 				D6A95A3926FF1FC200981245 /* View+Extension.swift in Sources */,
+				D6AA61372744EDD100EE6201 /* IdenticonsGridView.swift in Sources */,
 				D6A8F16026EB583D00C4BF9F /* LSP3ProfileListViewModel.swift in Sources */,
 				D601906226F4CC3B00F8BC0B /* LSP3ProfileSearchView.swift in Sources */,
 				D6A8F1AC26EF4A2D00C4BF9F /* ImagePicker.swift in Sources */,
@@ -1138,6 +1141,7 @@
 				D68B016026D634CA008C9403 /* UserAgent.swift in Sources */,
 				D6A95A3526FE842100981245 /* Misc+Temp.swift in Sources */,
 				D68B016826D63714008C9403 /* Date+Extension.swift in Sources */,
+				D6AA612D274439CC00EE6201 /* Create2ConfigurationRepository.swift in Sources */,
 				D664A8A526F0A30C00CB7A1F /* LinearGradient+Extension.swift in Sources */,
 				D601907926F4E1C600F8BC0B /* Views+Utility.swift in Sources */,
 				D601905D26F4CB5600F8BC0B /* ERC725IdentityView.swift in Sources */,
@@ -1163,6 +1167,7 @@
 				D6A95A3E27007EF100981245 /* UniversalProfileRepository.swift in Sources */,
 				D601909526F87CE000F8BC0B /* LSP3ProfileSearchViewModel.swift in Sources */,
 				D664A8AA26F0A63D00CB7A1F /* ImageLoader.swift in Sources */,
+				D6AA611C27442CDD00EE6201 /* IdenticonSelectorViewModel.swift in Sources */,
 				D6629EC426E959D900686119 /* SimpleCache.swift in Sources */,
 				D6A8F1A626EF3D2300C4BF9F /* LSP3CreateProfileView.swift in Sources */,
 				D68B009926D39A58008C9403 /* Web3KeyStore.swift in Sources */,
@@ -1177,6 +1182,7 @@
 				D601907626F4E1A700F8BC0B /* DefaultViewsFactory.swift in Sources */,
 				D6DCA55F26CE50150035CC12 /* UP_SampleUITests.swift in Sources */,
 				D6A95A3A26FF1FC300981245 /* View+Extension.swift in Sources */,
+				D6AA61382744EDD100EE6201 /* IdenticonsGridView.swift in Sources */,
 				D6A8F16126EB583D00C4BF9F /* LSP3ProfileListViewModel.swift in Sources */,
 				D601906326F4CC3B00F8BC0B /* LSP3ProfileSearchView.swift in Sources */,
 				D6A8F1AD26EF4A2D00C4BF9F /* ImagePicker.swift in Sources */,
@@ -1193,6 +1199,7 @@
 				D68B016126D634CA008C9403 /* UserAgent.swift in Sources */,
 				D6A95A3626FE842100981245 /* Misc+Temp.swift in Sources */,
 				D68B016926D63714008C9403 /* Date+Extension.swift in Sources */,
+				D6AA612E274439CC00EE6201 /* Create2ConfigurationRepository.swift in Sources */,
 				D664A8A626F0A30C00CB7A1F /* LinearGradient+Extension.swift in Sources */,
 				D601907A26F4E1C600F8BC0B /* Views+Utility.swift in Sources */,
 				D601905E26F4CB5600F8BC0B /* ERC725IdentityView.swift in Sources */,
@@ -1207,15 +1214,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D6DCA55126CE50150035CC12 /* PBXTargetDependency */ = {
+		D6AA613A2744F25300EE6201 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D6DCA53D26CE50140035CC12 /* UP Sample */;
-			targetProxy = D6DCA55026CE50150035CC12 /* PBXContainerItemProxy */;
+			targetProxy = D6AA61392744F25300EE6201 /* PBXContainerItemProxy */;
 		};
-		D6DCA55C26CE50150035CC12 /* PBXTargetDependency */ = {
+		D6AA613C2744F25F00EE6201 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D6DCA53D26CE50140035CC12 /* UP Sample */;
-			targetProxy = D6DCA55B26CE50150035CC12 /* PBXContainerItemProxy */;
+			targetProxy = D6AA613B2744F25F00EE6201 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

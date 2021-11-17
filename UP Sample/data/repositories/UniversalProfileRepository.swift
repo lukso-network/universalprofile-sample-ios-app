@@ -8,6 +8,7 @@
 
 import Foundation
 import universalprofile_ios_sdk
+import Alamofire
 
 final class UniversalProfileRepository {
         
@@ -19,5 +20,12 @@ final class UniversalProfileRepository {
         self.keyValueStore = keyValueStore
     }
     
-    // TODO: make use of relayService and Key-Value store
+    func uploadProfile(body: DeployLSP3ProfileRequest,
+                       progressCallback: @escaping (LSP3ProfileDeployTaskResponse) -> Void,
+                       responseHandler: @escaping (Result<(DeployLSP3ProfileResponse, LSP3ProfileDeployTaskResponse), AFError>) -> Void) {
+        
+        // Some caching may happen here using keyValueStore
+        
+        relayService.uploadProfile(body: body, progressCallback: progressCallback, responseHandler: responseHandler)
+    }
 }
