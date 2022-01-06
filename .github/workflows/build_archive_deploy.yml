@@ -21,6 +21,9 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v2
+        
+      - name: Fetching dependencies
+        run: ./carthage_update.sh
 
       - name: Install the Apple certificate and provisioning profile
         env:
