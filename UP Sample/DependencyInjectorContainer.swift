@@ -17,12 +17,15 @@ class DependencyInjectorContainer {
     
     let container = Container()
     
+    private let web3Instance = web3(provider: Web3HttpProvider(URL(string: Lukso.RPCTestNetwork)!)!)
+    
     private init() {
         container.register(KeyValueStore.self) { _ in DefaultKeyValueStore() }
-        container.register(UPIpServiceEnvornment.self) { _ in TestIpServiceEnvornment() }
+        container.register(LuksoRelayServiceEnvironment.self) { _ in DefaultLuksoRelayServiceEnvironment() }
+        container.register(UPIpServiceEnvironment.self) { _ in TestIpServiceEnvornment() }
         container.register(IPFSServiceEnvironment.self) { _ in TestIPFSServiceEnvironment() }
         container.register(UPIpService.self) { r in
-            UPIpServiceImpl(environment: r.resolve(UPIpServiceEnvornment.self)!)
+            UPIpServiceImpl(environment: r.resolve(UPIpServiceEnvironment.self)!)
         }
         
         container.register(ResourceServiceEnvironment.self) { _ in TestResourceServiceEnvironment() }
@@ -49,7 +52,10 @@ class DependencyInjectorContainer {
                                      web3KeyStore: web3Ks)
         }
         container.register(web3.self) { _ in
-            web3(provider: Web3HttpProvider(URL(string: Lukso.RPCTestNetwork)!)!)
+            self.web3Instance
+        }
+        container.register(LuksoRelayService.self) { r in
+            LuksoRelayServiceImpl(r.resolve(LuksoRelayServiceEnvironment.self)!)
         }
         container.register(LSP3ProfileProvider.self) { r in
             let environment = r.resolve(IPFSServiceEnvironment.self)!
@@ -63,10 +69,21 @@ class DependencyInjectorContainer {
             LSP3ProfileListViewModel(r.resolve(LSP3ProfileRepository.self)!)
         }
         container.register(LSP3CreateProfileViewModel.self) { r in
-            LSP3CreateProfileViewModel(r.resolve(LSP3ProfileRepository.self)!)
+            LSP3CreateProfileViewModel(r.resolve(LSP3ProfileRepository.self)!,
+                                       UniversalProfileRepository(r.resolve(LuksoRelayService.self)!,
+                                                                  r.resolve(KeyValueStore.self)!),
+                                       r.resolve(Web3KeyStore.self)!)
         }
         container.register(LSP3ProfileSearchViewModel.self) { r in
             LSP3ProfileSearchViewModel(r.resolve(LSP3ProfileRepository.self)!)
+        }
+        
+        let create2ConfigurationRepository = Create2ConfigurationRepository(container.resolve(LuksoRelayService.self)!)
+        container.register(Create2ConfigurationRepository.self) { r in
+            create2ConfigurationRepository
+        }
+        container.register(IdenticonSelectorViewModel.self) { r in
+            IdenticonSelectorViewModel(r.resolve(Create2ConfigurationRepository.self)!)
         }
     }
     

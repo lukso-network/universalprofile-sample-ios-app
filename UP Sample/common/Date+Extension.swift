@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 extension Date {
     
     init(_ millisec: Int64) {

@@ -7,15 +7,12 @@
 //
 
 import SwiftUI
-import RxSwift
 import universalprofile_ios_sdk
 
 struct LSP3ProfileDetailsView: View {
     
-    private let disposeBag = DisposeBag()
-    @State private var profile: LSP3Profile? = nil
-    
-    let viewModel = LSP3ProfileDetailsViewModel(DependencyInjectorContainer.resolve(LSP3ProfileRepository.self)!) 
+    @State private var appeared = false
+    @State private var viewModel: LSP3ProfileDetailsViewModel!
     
     /// Hash in a following form: QmecrGejUQVXpW4zS948pNvcnQrJ1KiAoM6bdfrVcWZsn5
     let lsp3ProfileCid: String
@@ -25,48 +22,48 @@ struct LSP3ProfileDetailsView: View {
             LinearGradient(.lightStart, .lightEnd)
                 .edgesIgnoringSafeArea(.all)
             
-            ScrollView {
-                if viewModel.progress {
-                    ProgressView()
-                        .frame(width: UIScreen.screenWidth,
-                               height: UIScreen.screenHeight,
-                               alignment: .center)
-                } else if let error = viewModel.errorEvent.getIfNotConsumed() {
-                    Text(error.localizedDescription)
-                        .font(.body)
-                        .foregroundColor(Color.red.opacity(0.75))
+            if appeared {
+                ScrollView {
+                    if viewModel.progress {
+                        ProgressView()
+                            .frame(width: UIScreen.screenWidth,
+                                   height: UIScreen.screenHeight,
+                                   alignment: .center)
+                    } else if let error = viewModel.errorEvent.getIfNotConsumed() {
+                        Text(error.localizedDescription)
+                            .font(.body)
+                            .foregroundColor(Color.red.opacity(0.75))
+                            .padding()
+                    } else if let profile = viewModel.profile {
+                        createProfileView(profile)
+                    }
+                    
+                    Divider()
+                        .padding(.top, 16)
+                        .padding(.bottom, 16)
+                    
+                    Text(viewModel.rawProfileJson ?? "")
                         .padding()
-                } else if let profile = profile {
-                    createProfileView(profile)
+                        .font(.body)
+                        .foregroundColor(Color.gray)
                 }
-                
-                Divider()
-                    .padding(.top, 16)
-                    .padding(.bottom, 16)
-                
-                Text(viewModel.rawProfileJson ?? "")
-                    .padding()
-                    .font(.body)
-                    .foregroundColor(Color.gray)
             }
         }
-        .disabled(viewModel.progress)
+        .disabled(viewModel?.progress ?? false)
         .onAppear {
-            viewModel.lsp3Profile
-                .observe(on: MainScheduler.instance)
-                .subscribe(onNext: { profile in
-                    self.profile = profile
-                }, onError: nil, onCompleted: nil, onDisposed: nil)
-                .disposed(by: disposeBag)
-                
-            viewModel.load(lsp3ProfileCid)
+            if !appeared {
+                viewModel = LSP3ProfileDetailsViewModel(DependencyInjectorContainer.resolve(LSP3ProfileRepository.self)!)
+                appeared = true
+            }
+            
+            viewModel?.load(lsp3ProfileCid)
         }
     }
     
-    private func createProfileView(_ profile: LSP3Profile) -> some View {
+    private func createProfileView(_ profile: IdentifiableLSP3Profile) -> some View {
         return VStack(alignment: .leading, spacing: 0) {
             ZStack {
-                CustomAsyncImage(withURL: profile.backgroundImage.first(where: { image in
+                CustomAsyncImage(withURL: profile.lsp3Profile.backgroundImage.first(where: { image in
                     image.height != nil && image.height! < 600 &&
                         image.width != nil && image.width! < 600
                 })?.url ?? "",
@@ -74,8 +71,8 @@ struct LSP3ProfileDetailsView: View {
                 .frame(height: 200)
                 .frame(maxWidth: UIScreen.screenWidth)
                 .mask(Rectangle())
-                
-                CustomAsyncImage(withURL: profile.profileImage.first(where: { image in
+
+                CustomAsyncImage(withURL: profile.lsp3Profile.profileImage.first(where: { image in
                     image.height != nil && image.height! < 600 &&
                         image.width != nil && image.width! < 600
                 })?.url ?? "",
@@ -95,27 +92,27 @@ struct LSP3ProfileDetailsView: View {
                 .padding(.top, 8)
                 .padding(.bottom, 8)
             
-            Text(profile.name)
+            Text(profile.lsp3Profile.name)
                 .colorScheme(.light)
                 .font(.title3.bold())
                 .padding(.leading, 16)
                 .padding(.trailing, 16)
                 .padding(.bottom, 8)
             
-            if !profile.description.isEmpty {
-                Text(profile.description)
+            if !profile.lsp3Profile.description.isEmpty {
+                Text(profile.lsp3Profile.description)
                     .colorScheme(.light)
                     .padding(.leading, 16)
                     .padding(.trailing, 16)
                     .padding(.bottom, 8)
             }
             
-            if !profile.tags.isEmpty {
-                createTagsGrid(profile.tags).padding(.all, 16)
+            if !profile.lsp3Profile.tags.isEmpty {
+                createTagsGrid(profile.lsp3Profile.tags).padding(.all, 16)
             }
             
-            if !profile.links.isEmpty {
-                ForEach(profile.links) { link in
+            if !profile.lsp3Profile.links.isEmpty {
+                ForEach(profile.lsp3Profile.links) { link in
                     defaultLinkView(title: link.title, url: link.url)
                 }.padding(.bottom, 16)
             }

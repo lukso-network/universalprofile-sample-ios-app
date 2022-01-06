@@ -15,12 +15,15 @@ jobs:
         swift: ["5"]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: fwal/setup-swift@d43a564349d1341cd990cfbd70d94d63b8899475
+      - uses: fwal/setup-swift@v1.11.0
         with:
           swift-version: ${{ matrix.swift }}
 
       - name: Checkout repository
         uses: actions/checkout@v2
+        
+      - name: Fetching dependencies
+        run: ./carthage_update.sh
 
       - name: Install the Apple certificate and provisioning profile
         env:

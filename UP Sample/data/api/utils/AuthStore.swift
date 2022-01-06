@@ -26,7 +26,7 @@ class AuthStore {
             return .success(token)
         }
         
-        guard let result = keyValueStore.get(key: AuthStore.KEY_TOKEN), !result.isEmpty else {
+        guard let result = keyValueStore.getRaw(key: AuthStore.KEY_TOKEN), !result.isEmpty else {
             return .failure(.tokenNotFound)
         }
         
@@ -48,7 +48,7 @@ class AuthStore {
         do {
             let tokenJson = try JSONEncoder().encode(token)
             
-            if keyValueStore.save(key: AuthStore.KEY_TOKEN, value: String(data: tokenJson, encoding: .utf8)!) {
+            if try! keyValueStore.save(key: AuthStore.KEY_TOKEN, value: String(data: tokenJson, encoding: .utf8)!) {
                 self.token = token
                 return .success(token)
             } else {

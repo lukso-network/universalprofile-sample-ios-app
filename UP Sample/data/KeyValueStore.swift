@@ -9,8 +9,12 @@
 import Foundation
 
 protocol KeyValueStore {
-    func get(key: String) -> String?
-    func save(key: String, value: String) -> Bool
+    func getRaw(key: String) -> String?
+    func saveRaw(key: String, value: String) -> Bool
+    
+    func get<T>(key: String) throws -> T? where T: Decodable
+    func save<T>(key: String, value: T) throws -> Bool where T: Encodable
+    
     func delete(key: String) -> Bool
     func dump() -> String
 }
@@ -33,13 +37,23 @@ class DefaultKeyValueStore: KeyValueStore {
         return true
     }
     
-    func get(key: String) -> String? {
+    func getRaw(key: String) -> String? {
         return prefs.string(forKey: key)
     }
     
-    func save(key: String, value: String) -> Bool {
+    func saveRaw(key: String, value: String) -> Bool {
         prefs.setValue(value, forKey: key)
         return true
     }
     
+    func get<T>(key: String) throws -> T? where T: Decodable {
+        guard let rawJson = getRaw(key: key), !rawJson.isEmpty else { return nil }
+        return try JSONDecoder().decode(T.self, from: Data(rawJson.bytes))
+    }
+    
+    func save<T>(key: String, value: T) throws -> Bool where T: Encodable {
+        let rawJsonData = try JSONEncoder().encode(value)
+        guard let rawJson = String(data: rawJsonData, encoding: .utf8) else { return false }
+        return saveRaw(key: key, value: rawJson)
+    }
 }

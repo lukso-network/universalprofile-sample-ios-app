@@ -19,15 +19,15 @@ class TestIPFSServiceEnvironment: IPFSServiceEnvironment {
     }
 }
 
-class TestIpServiceEnvornment : UPIpServiceEnvornment {
+class TestIpServiceEnvornment : UPIpServiceEnvironment {
     func baseUrl() -> String {
-        return "http://35.246.184.226"
+        return "http://35.246.184.226/api/v1/"
     }
 }
 
-class LocalIpServiceEnvornment : UPIpServiceEnvornment {
+class LocalIpServiceEnvornment : UPIpServiceEnvironment {
     func baseUrl() -> String {
-        return "http//:localhost:8080"
+        return "http//:localhost:8080/api/v1/"
     }
 }
 

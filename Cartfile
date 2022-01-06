@@ -1,8 +1,2 @@
 github "Swinject/Swinject"
-github "ReactiveX/RxSwift" "6.2.0"
-
-git "file:///Users/jeneavn/Documents/Projects/temp/universalprofile-ios-sdk/" "development"
-# or (to get a development version)
-#github "lukso-network/universalprofile-ios-sdk" "development"
-# or (to get a production version)
-#github "lukso-network/universalprofile-ios-sdk"
+github "lukso-network/universalprofile-ios-sdk" "development-contracts-v0.2.2"

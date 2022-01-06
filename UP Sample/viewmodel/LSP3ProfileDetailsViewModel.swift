@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import RxRelay
-import RxSwift
 import universalprofile_ios_sdk
 
 class LSP3ProfileDetailsViewModel : ObservableObject {
@@ -16,30 +14,23 @@ class LSP3ProfileDetailsViewModel : ObservableObject {
     
     @Published private(set) var progress = false
     @Published private(set) var errorEvent: ConsumableEvent<Error> = .empty()
-    let lsp3Profile = BehaviorRelay<LSP3Profile?>(value: nil)
     @Published private(set) var rawProfileJson: String? = nil
+    @Published private(set) var profile: IdentifiableLSP3Profile? = nil {
+        didSet {
+            if let profile = profile {
+                let encoder = JSONEncoder()
+                encoder.outputFormatting = .prettyPrinted
+                guard let data = try? encoder.encode(profile) else { return }
+                
+                self.rawProfileJson = String(data: data, encoding: .utf8)
+            }
+        }
+    }
     
     private var lsp3ProfileHash = ""
-    private let disposeBag = DisposeBag()
     
     init(_ lsp3ProfileRepository: LSP3ProfileRepository) {
         self.lsp3ProfileRepository = lsp3ProfileRepository
-        subscribeToUpdates()
-    }
-    
-    private func subscribeToUpdates() {
-        lsp3Profile
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { profile in
-                if let profile = profile {
-                    let encoder = JSONEncoder()
-                    encoder.outputFormatting = .prettyPrinted
-                    guard let data = try? encoder.encode(profile) else { return }
-                    
-                    self.rawProfileJson = String(data: data, encoding: .utf8)
-                }
-            }, onError: nil, onCompleted: nil, onDisposed: nil)
-            .disposed(by: disposeBag)
     }
     
     func load(_ lsp3ProfileHash: String) {
@@ -50,7 +41,7 @@ class LSP3ProfileDetailsViewModel : ObservableObject {
             return
         }
         
-        lsp3Profile.accept(profile)
+        self.profile = profile
         progress = false
     }
     
@@ -59,7 +50,7 @@ class LSP3ProfileDetailsViewModel : ObservableObject {
         lsp3ProfileRepository.search(lsp3Id: lsp3ProfileHash) { result in
             switch result {
                 case .success(let lsp3Profile):
-                    self.lsp3Profile.accept(lsp3Profile)
+                    self.profile = lsp3Profile
                 case .failure(let error):
                     self.onError(error)
             }

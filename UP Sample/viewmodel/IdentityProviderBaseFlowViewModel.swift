@@ -7,22 +7,31 @@
 //
 
 import Foundation
-import RxSwift
-import RxRelay
+import SwiftUI
 import web3swift
 import universalprofile_ios_sdk
 
-class IdentityProviderBaseFlowViewModel {
+class IdentityProviderBaseFlowViewModel: ObservableObject {
     
     private let signInUsecase: SignInUsecase
     private let sampleResourceService: SampleResourceService
     private let web3KeyStore: Web3KeyStore
     
-    let errorEventData = PublishRelay<AppError>()
-    let progress = BehaviorRelay<Bool>(value: false)
-    let toast = PublishRelay<String>()
-    let myInfo = BehaviorRelay<MyInfo?>(value: nil)
-    let keystore = BehaviorRelay<EthereumKeystoreV3?>(value: nil)
+    @Published var showProgress = false
+    @Published var showToastAlert = false
+    @Published private (set) var toastMessage: String? = nil
+    @Published private (set) var myInfo: MyInfo? = nil
+    @Published private (set) var address: String = "..."
+    @Published private (set) var publicKey: String = "..."
+    @Published private (set) var errorText: String = "..."
+    
+    private var keystore: EthereumKeystoreV3? = nil {
+        didSet {
+            if let keystore = keystore {
+                address = keystore.getAddress()!.address.addHexPrefix()
+            }
+        }
+    }
     
     init(signInUsecase: SignInUsecase,
          sampleResourceService: SampleResourceService,
@@ -33,51 +42,52 @@ class IdentityProviderBaseFlowViewModel {
     }
     
     func load() {
-        progress.accept(true)
+        showProgress = true
         
         switch web3KeyStore.loadOrGenerateDefaultKeyPair() {
             case .success(let keystore):
-                self.onWalletFound(keystore)
-                self.progress.accept(false)
+                onWalletFound(keystore)
             case .failure(let error):
-                self.onError(error)
-                self.progress.accept(false)
+                onError(error)
         }
+        
+        showProgress = false
     }
     
     private func onWalletFound(_ keystore: EthereumKeystoreV3) {
-        self.keystore.accept(keystore)
+        self.keystore = keystore
     }
     
     func signIn() {
-        progress.accept(true)
+        showProgress = true
         signInUsecase.signIn { result in
             switch result {
                 case .success:
                     self.callMe()
                 case .failure(let error):
                     self.onError(error)
-                    self.progress.accept(false)
+                    self.showProgress = false
             }
         }
     }
     
     private func onSuccessFullySignedIn(_ myInfo: MyInfo) {
         toastIt("Received my info")
-        self.myInfo.accept(myInfo)
+        self.myInfo = myInfo
     }
     
     private func onError(_ error: AppError) {
         NSLog(error.description())
-        errorEventData.accept(error)
+        errorText = error.description()
     }
     
     private func toastIt(_ msg: String) {
-        toast.accept(msg)
+        toastMessage = msg
+        showToastAlert = true
     }
     
     func callMe() {
-        progress.accept(true)
+        showProgress = true
         sampleResourceService.getMyInfo { result in
             switch result {
                 case .success(let me):
@@ -85,7 +95,7 @@ class IdentityProviderBaseFlowViewModel {
                 case .failure(let error):
                     self.onError(.simpleException(error: error))
             }
-            self.progress.accept(false)
+            self.showProgress = false
         }
     }
 }
